@@ -9,7 +9,7 @@ defineProps<{
 <template>
     <section
         id="contact"
-        class="rounded-3xl border border-cyan-400/20 bg-cyan-400/10 p-8 shadow-xl shadow-cyan-950/10"
+        class="scroll-mt-24 rounded-3xl border border-cyan-400/20 bg-cyan-400/10 p-8 shadow-xl shadow-cyan-950/10"
     >
         <p class="text-sm font-semibold uppercase tracking-[0.35em] text-cyan-100">
             Contact

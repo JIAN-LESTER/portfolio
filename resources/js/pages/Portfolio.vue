@@ -17,7 +17,7 @@ defineOptions({
 <template>
     <Head title="Portfolio" />
 
-    <div class="space-y-8">
+    <div class="space-y-12">
         <HeroSection :personal="portfolioData.personal" />
         <AboutSection :personal="portfolioData.personal" />
         <EducationSection :education="portfolioData.education" />
