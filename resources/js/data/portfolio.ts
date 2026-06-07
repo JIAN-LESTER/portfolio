@@ -10,7 +10,7 @@ export const portfolioData: PortfolioData = {
     phone: '09072894778',
     location: 'Kibawe, Bukidnon, Philippines',
     github: 'https://github.com/JIAN-LESTER',
-    linkedin: 'www.linkedin.com/in/jian-lester-tabarno-074139333',
+    linkedin: 'https://www.linkedin.com/in/jian-lester-tabarno-074139333/',
     resumeUrl: '/resume.pdf',
     image: '/images/profile.jpg',
   },
