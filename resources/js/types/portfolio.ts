@@ -23,7 +23,12 @@ export interface EducationItem {
 
 export interface SkillGroup {
   title: string
-  items: string[]
+  items: SkillItem[]
+}
+
+export interface SkillItem {
+  name: string
+  logo?: string
 }
 
 export interface ProjectItem {

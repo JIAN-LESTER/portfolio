@@ -23,16 +23,61 @@ defineProps<{
                 <h3 class="text-lg font-semibold text-white">
                     {{ group.title }}
                 </h3>
-                <ul class="mt-4 flex flex-wrap gap-2">
-                    <li
-                        v-for="item in group.items"
-                        :key="item"
-                        class="rounded-full border border-white/10 px-3 py-1 text-sm text-slate-200"
-                    >
-                        {{ item }}
-                    </li>
-                </ul>
+                <div class="skill-marquee mt-5 overflow-hidden">
+                    <div class="skill-track flex w-max gap-4">
+                        <div
+                            v-for="copy in 2"
+                            :key="copy"
+                            class="flex gap-4"
+                        >
+                            <div
+                                v-for="item in group.items"
+                                :key="`${copy}-${item.name}`"
+                                class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/10 p-3"
+                                :title="item.name"
+                            >
+                                <img
+                                    v-if="item.logo"
+                                    :src="item.logo"
+                                    :alt="item.name"
+                                    class="h-9 w-9 object-contain"
+                                    loading="lazy"
+                                >
+                                <span
+                                    v-else
+                                    class="text-sm font-semibold text-cyan-100"
+                                >
+                                    {{ item.name }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </article>
         </div>
     </section>
 </template>
+
+<style scoped>
+.skill-marquee {
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.skill-track {
+    animation: skill-marquee 16s linear infinite;
+}
+
+.skill-marquee:hover .skill-track {
+    animation-play-state: paused;
+}
+
+@keyframes skill-marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-50% - 0.5rem));
+    }
+}
+</style>

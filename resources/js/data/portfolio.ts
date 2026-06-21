@@ -29,19 +29,41 @@ export const portfolioData: PortfolioData = {
   skills: [
     {
       title: 'Programming Languages',
-      items: ['PHP', 'Dart', 'TypeScript', 'SQL'],
+      items: [
+        { name: 'PHP', logo: 'https://cdn.simpleicons.org/php/777BB4' },
+        { name: 'Dart', logo: 'https://cdn.simpleicons.org/dart/0175C2' },
+        { name: 'TypeScript', logo: 'https://cdn.simpleicons.org/typescript/3178C6' },
+        { name: 'SQL', logo: 'https://cdn.simpleicons.org/sqlite/003B57' },
+        { name: 'Python', logo: 'https://cdn.simpleicons.org/python/3776AB' },
+        { name: 'Java', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg' },
+      ],
     },
     {
       title: 'Frameworks',
-      items: ['Laravel', 'Flutter', 'React', 'Next.js'],
+      items: [
+        { name: 'Laravel', logo: 'https://cdn.simpleicons.org/laravel/FF2D20' },
+        { name: 'Flutter', logo: 'https://cdn.simpleicons.org/flutter/02569B' },
+        { name: 'React', logo: 'https://cdn.simpleicons.org/react/61DAFB' },
+        { name: 'Next.js', logo: 'https://cdn.simpleicons.org/nextdotjs/FFFFFF' },
+      ],
     },
     {
       title: 'Database/Cloud',
-      items: ['MySQL', 'Firebase', 'Firestore'],
+      items: [
+        { name: 'MySQL', logo: 'https://cdn.simpleicons.org/mysql/4479A1' },
+        { name: 'PostgreSQL', logo: 'https://cdn.simpleicons.org/postgresql/4169E1' },
+        { name: 'Firebase', logo: 'https://cdn.simpleicons.org/firebase/FFCA28' },
+        { name: 'Firestore', logo: 'https://cdn.simpleicons.org/firebase/FFCA28' },
+      ],
     },
     {
       title: 'AI/Tools',
-      items: ['RAG', 'Pinecone', 'Gemini', 'NLP'],
+      items: [
+        { name: 'RAG' },
+        { name: 'Pinecone', logo: 'https://cdn.simpleicons.org/pinecone/000000' },
+        { name: 'Gemini', logo: 'https://cdn.simpleicons.org/googlegemini/8E75B2' },
+        { name: 'NLP' },
+      ],
     },
   ],
 
