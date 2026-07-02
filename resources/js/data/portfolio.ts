@@ -10,7 +10,7 @@ export const portfolioData: PortfolioData = {
         location: 'Philippines → Relocating to Singapore, Aug 2026',
         availability: 'Available August · open to remote work in July',
         email: 'tabarno.jian@gmail.com',
-        github: 'https://github.com/jianlester',
+        github: 'https://github.com/JIAN-LESTER',
         linkedin: 'https://linkedin.com/in/jianlestertabarno',
         website: 'https://jianlester.dev',
         image: '/images/profile.jpg',
