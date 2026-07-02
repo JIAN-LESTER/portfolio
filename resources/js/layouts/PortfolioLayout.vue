@@ -7,7 +7,7 @@ import type { StageSection } from '@/composables/useScrollStage';
 import { portfolioData } from '@/data/portfolio';
 
 const sections: StageSection[] = [
-    { id: 'hero', label: 'Hero', slides: 1 },
+    { id: 'hero', label: '', slides: 1 },
     { id: 'about', label: 'About', slides: 1 },
     { id: 'journey', label: 'Journey', slides: 2 },
     { id: 'resume', label: 'Resume', slides: 1 },

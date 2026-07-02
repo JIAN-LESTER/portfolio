@@ -14,10 +14,9 @@ const { isActiveSection } = useSectionSlide('resume');
         :class="{ 'is-active': isActiveSection }"
     >
         <div class="section-inner">
-            <p class="eyebrow">RECORD 04 / 08 &middot; RESUME</p>
-
             <div class="panel">
                 <article class="copy">
+                    <p class="eyebrow">RESUME</p>
                     <p class="kicker">PREVIEW</p>
                     <h2 class="title">Resume Preview</h2>
                     <p class="desc">
@@ -66,7 +65,6 @@ const { isActiveSection } = useSectionSlide('resume');
 }
 
 .panel {
-    margin-top: 2rem;
     display: grid;
     grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
     gap: clamp(1.5rem, 4vw, 3rem);
@@ -78,6 +76,7 @@ const { isActiveSection } = useSectionSlide('resume');
     font-size: 0.72rem;
     letter-spacing: 0.18em;
     color: var(--depth);
+    margin-bottom: 1rem;
 }
 
 .kicker {

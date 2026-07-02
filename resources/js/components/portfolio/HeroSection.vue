@@ -93,7 +93,7 @@ onMounted(() => {
     >
         <div class="section-inner">
             <div class="hero-copy">
-                <p class="eyebrow">RECORD 01 / 07 &middot; HERO</p>
+                <p class="eyebrow"></p>
 
                 <transition name="terminal-fade">
                     <div v-if="showTerminal" class="terminal" role="status">

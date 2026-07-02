@@ -113,7 +113,7 @@ function getIcon(item: SkillItem): Component {
         :class="{ 'is-active': isActiveSection }"
     >
         <div class="section-inner">
-            <p class="eyebrow">RECORD 06 / 07 &middot; SKILLS</p>
+            <p class="eyebrow">SKILLS</p>
 
             <div class="grid">
                 <article

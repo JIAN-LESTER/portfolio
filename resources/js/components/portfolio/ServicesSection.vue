@@ -16,7 +16,7 @@ const { active, count, isActiveSection, next, prev, goTo } =
     >
         <div class="section-inner">
             <div class="head-row">
-                <p class="eyebrow">RECORD 05 / 07 &middot; SERVICES</p>
+                <p class="eyebrow">SERVICES</p>
                 <PaginationDots
                     :count="count"
                     :active="active"
@@ -28,7 +28,7 @@ const { active, count, isActiveSection, next, prev, goTo } =
 
             <div
                 class="track"
-                :style="{ transform: `translateX(-${active * 100}%)` }"
+                :style="{ transform: `translateX(calc(-${active * 100}% + ${active * 1.8}rem))` }"
             >
                 <article
                     v-for="service in services"
@@ -82,12 +82,14 @@ const { active, count, isActiveSection, next, prev, goTo } =
 
 .track {
     display: flex;
+    width: calc(100% + 7rem);
+    gap: 1.8rem;
     transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .slide {
-    flex: 0 0 100%;
-    max-width: 100%;
+    flex: 0 0 calc(100% - 7rem);
+    max-width: calc(100% - 7rem);
     opacity: 0;
     transform: translateY(10px);
 }
@@ -155,6 +157,18 @@ const { active, count, isActiveSection, next, prev, goTo } =
         animation: none !important;
         opacity: 1;
         transform: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .track {
+        width: 100%;
+        gap: 0;
+    }
+
+    .slide {
+        flex-basis: 100%;
+        max-width: 100%;
     }
 }
 </style>
