@@ -13,7 +13,7 @@ const { isActiveSection } = useSectionSlide('about');
         :class="{ 'is-active': isActiveSection }"
     >
         <div class="section-inner">
-            <p class="eyebrow">RECORD 02 / 07 &middot; ABOUT</p>
+            <p class="eyebrow">ABOUT</p>
 
             <div class="grid">
                 <h2 class="headline">
