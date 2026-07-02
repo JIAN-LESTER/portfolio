@@ -11,14 +11,23 @@ const query = ref('');
 const resultLine = ref('');
 const showResult = ref(false);
 const showIdentity = ref(false);
+const showTerminal = ref(true);
 
-const fullQuery = "query --role='developer' --status='available' --window='Aug 2026'";
-const fullResult = '\u2192 1 match found';
+const fullQuery =
+    "query --role='developer' --status='available' --window='Aug 2026'";
+const fullResult = '-> 1 match found';
 
 const reducedMotion =
-    typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
+    typeof window !== 'undefined' && window.matchMedia
+        ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        : false;
 
-function typeLine(text: string, target: typeof query, speed: number, onDone?: () => void) {
+function typeLine(
+    text: string,
+    target: typeof query,
+    speed: number,
+    onDone?: () => void,
+) {
     let i = 0;
     const step = () => {
         target.value = text.slice(0, i);
@@ -37,6 +46,7 @@ onMounted(() => {
     if (reducedMotion) {
         query.value = fullQuery;
         resultLine.value = fullResult;
+        showTerminal.value = false;
         showResult.value = true;
         showIdentity.value = true;
 
@@ -48,7 +58,18 @@ onMounted(() => {
             window.setTimeout(() => {
                 showResult.value = true;
                 typeLine(fullResult, resultLine, 30, () => {
-                    window.setTimeout(() => (showIdentity.value = true), 250);
+                    window.setTimeout(() => {
+                        window.setTimeout(
+                            () => {
+                                showTerminal.value = false;
+                                window.setTimeout(
+                                    () => (showIdentity.value = true),
+                                    250,
+                                );
+                            },
+                            600,
+                        );
+                    }, 250);
                 });
             }, 350);
         });
@@ -57,37 +78,91 @@ onMounted(() => {
 </script>
 
 <template>
-    <section class="stage-section hero" :class="{ 'is-active': isActiveSection }">
+    <section
+        class="stage-section hero"
+        :class="{ 'is-active': isActiveSection }"
+    >
         <div class="section-inner">
-            <p class="eyebrow">RECORD 01 / 07 &middot; HERO</p>
+            <div class="hero-copy">
+                <p class="eyebrow">RECORD 01 / 07 &middot; HERO</p>
 
-            <div class="terminal" role="status">
-                <div class="terminal-head">
-                    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-                    <span class="terminal-title">jian@portfolio &mdash; retrieve</span>
-                </div>
-                <div class="terminal-body">
-                    <p class="line"><span class="prompt">$</span> {{ query }}<span class="cursor" v-if="!showResult">&#9608;</span></p>
-                    <p v-if="showResult" class="line result">{{ resultLine }}: <strong>{{ personal.name }}</strong></p>
+                <transition name="terminal-fade">
+                    <div v-if="showTerminal" class="terminal" role="status">
+                        <div class="terminal-head">
+                            <span class="dot r"></span
+                            ><span class="dot y"></span
+                            ><span class="dot g"></span>
+                            <span class="terminal-title"
+                                >jian@portfolio &mdash; retrieve</span
+                            >
+                        </div>
+                        <div class="terminal-body">
+                            <p class="line">
+                                <span class="prompt">$</span> {{ query
+                                }}<span class="cursor" v-if="!showResult"
+                                    >&#9608;</span
+                                >
+                            </p>
+                            <p v-if="showResult" class="line result">
+                                {{ resultLine }}:
+                                <strong>{{ personal.name }}</strong>
+                            </p>
+                        </div>
+                    </div>
+                </transition>
+
+                <div class="identity" :class="{ show: showIdentity }">
+                    <h1 class="name">{{ personal.name }}</h1>
+                    <p class="role">{{ personal.role }}</p>
+                    <p class="tagline">{{ personal.tagline }}</p>
+
+                    <div class="meta-row">
+                        <span class="chip">{{ personal.location }}</span>
+                        <span
+                            v-if="personal.availability"
+                            class="chip chip-signal"
+                            >{{ personal.availability }}</span
+                        >
+                    </div>
+
+                    <div class="cta-row">
+                        <a
+                            class="btn btn-primary"
+                            :href="`mailto:${personal.email}`"
+                            >Email me</a
+                        >
+                        <a
+                            v-if="personal.resumeUrl"
+                            class="btn btn-ghost"
+                            :href="personal.resumeUrl"
+                            target="_blank"
+                            rel="noreferrer"
+                            >View resume</a
+                        >
+                        <a
+                            v-if="personal.github"
+                            class="btn btn-ghost"
+                            :href="personal.github"
+                            target="_blank"
+                            rel="noreferrer"
+                            >GitHub</a
+                        >
+                    </div>
                 </div>
             </div>
 
-            <div class="identity" :class="{ show: showIdentity }">
-                <h1 class="name">{{ personal.name }}</h1>
-                <p class="role">{{ personal.role }}</p>
-                <p class="tagline">{{ personal.tagline }}</p>
-
-                <div class="meta-row">
-                    <span class="chip">{{ personal.location }}</span>
-                    <span v-if="personal.availability" class="chip chip-signal">{{ personal.availability }}</span>
-                </div>
-
-                <div class="cta-row">
-                    <a class="btn btn-primary" :href="`mailto:${personal.email}`">Email me</a>
-                    <a v-if="personal.resumeUrl" class="btn btn-ghost" :href="personal.resumeUrl" target="_blank" rel="noreferrer">View résumé</a>
-                    <a v-if="personal.github" class="btn btn-ghost" :href="personal.github" target="_blank" rel="noreferrer">GitHub</a>
-                </div>
-            </div>
+            <figure
+                v-if="personal.image"
+                class="profile-figure"
+                :class="{ show: showIdentity, expanded: !showTerminal }"
+            >
+                <img
+                    class="profile-image"
+                    :src="personal.image"
+                    :alt="personal.name"
+                />
+                <figcaption class="sr-only">{{ personal.name }}</figcaption>
+            </figure>
 
             <p class="scroll-hint">scroll to continue &darr;</p>
         </div>
@@ -100,10 +175,40 @@ onMounted(() => {
     align-items: center;
 }
 
+.terminal-fade-leave-active {
+    transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, margin-bottom 0.4s ease;
+    overflow: hidden;
+    max-height: 220px;
+}
+.terminal-fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+    max-height: 0;
+    margin-bottom: 0;
+}
+
+.profile-figure.expanded {
+    width: min(36vw, 420px);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease,
+        width 0.5s ease 0.1s;
+}
+
 .section-inner {
-    width: min(760px, 100%);
-    margin: 0 auto;
-    padding: 0 clamp(1.25rem, 5vw, 2rem);
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 360px);
+    gap: clamp(1rem, 4vw, 3rem);
+    align-items: center;
+    padding: 0 15px;
+    padding-inline: clamp(15px, 8vw, 140px);
+    max-width: 1600px;
+    margin-inline: auto;
+}
+
+.hero-copy {
+    min-width: 0;
 }
 
 .eyebrow {
@@ -112,6 +217,43 @@ onMounted(() => {
     letter-spacing: 0.18em;
     color: var(--depth);
     margin-bottom: 1.75rem;
+}
+
+.profile-figure {
+    position: relative;
+    justify-self: end;
+    width: min(32vw, 360px);
+    min-width: 220px;
+    aspect-ratio: 4 / 5;
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+.profile-figure::before {
+    content: '';
+    position: absolute;
+    inset: 12px -12px -12px 12px;
+    border: 1px solid var(--depth-dim);
+    border-radius: 16px;
+}
+
+.profile-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--panel);
+}
+
+.profile-figure.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .terminal {
@@ -193,7 +335,9 @@ onMounted(() => {
     margin-top: 2.25rem;
     opacity: 0;
     transform: translateY(16px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
 }
 
 .identity.show {
@@ -219,7 +363,7 @@ onMounted(() => {
 
 .tagline {
     margin-top: 1rem;
-    max-width: 46ch;
+    max-width: 54ch;
     color: var(--muted);
     line-height: 1.65;
     font-size: 1rem;
@@ -261,7 +405,11 @@ onMounted(() => {
     padding: 0.7rem 1.3rem;
     border-radius: 999px;
     text-decoration: none;
-    transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    transition:
+        transform 0.18s ease,
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease;
 }
 
 .btn-primary {
@@ -286,12 +434,25 @@ onMounted(() => {
 }
 
 .scroll-hint {
-    margin-top: 3rem;
+    grid-column: 1 / -1;
+    margin-top: 1rem;
     font-family: var(--font-mono);
     font-size: 0.68rem;
     color: var(--muted);
     opacity: 0.7;
     animation: bob 2.4s ease-in-out infinite;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 @keyframes rise {
@@ -317,13 +478,31 @@ onMounted(() => {
     }
 }
 
+@media (max-width: 820px) {
+    .section-inner {
+        grid-template-columns: 1fr;
+        gap: 1.35rem;
+    }
+
+    .profile-figure {
+        justify-self: start;
+        width: min(72vw, 280px);
+        min-width: 0;
+    }
+
+    .scroll-hint {
+        margin-top: 0.5rem;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .is-active .terminal {
         animation: none;
         opacity: 1;
         transform: none;
     }
-    .identity {
+    .identity,
+    .profile-figure {
         transition: none;
     }
     .scroll-hint {
