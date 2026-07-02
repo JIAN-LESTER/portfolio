@@ -1,10 +1,84 @@
 <script setup lang="ts">
+import type { Component } from 'vue';
+import {
+    Atom,
+    Blocks,
+    Braces,
+    Brain,
+    Cloud,
+    Code,
+    Coffee,
+    Container,
+    Database,
+    DraftingCompass,
+    Figma,
+    FileCode,
+    Flame,
+    FolderOpen,
+    Github,
+    GitBranch,
+    LayoutTemplate,
+    MessageSquareText,
+    Network,
+    Palette,
+    PanelTop,
+    ScanSearch,
+    Search,
+    Send,
+    Smartphone,
+    Sparkles,
+    SquareTerminal,
+    Table2,
+    Triangle,
+    Wind,
+} from 'lucide-vue-next';
 import { useSectionSlide } from '@/composables/useScrollStage';
-import type { SkillGroup } from '@/types/portfolio';
+import type { SkillGroup, SkillItem } from '@/types/portfolio';
 
 defineProps<{ skills: SkillGroup[] }>();
 
 const { isActiveSection } = useSectionSlide('skills');
+
+const iconMap: Record<string, Component> = {
+    api: Network,
+    blocks: Blocks,
+    brain: Brain,
+    cloud: Cloud,
+    coffee: Coffee,
+    container: Container,
+    dart: Code,
+    database: Database,
+    'drafting-compass': DraftingCompass,
+    firebase: Flame,
+    flame: Flame,
+    'folder-open': FolderOpen,
+    'git-branch': GitBranch,
+    github: Github,
+    javascript: Braces,
+    laravel: Braces,
+    'layout-template': LayoutTemplate,
+    'message-square-text': MessageSquareText,
+    nextjs: Triangle,
+    palette: Palette,
+    'panel-top': PanelTop,
+    'pen-tool': Figma,
+    php: FileCode,
+    python: Code,
+    react: Atom,
+    'scan-search': ScanSearch,
+    search: Search,
+    send: Send,
+    smartphone: Smartphone,
+    sparkles: Sparkles,
+    'table-2': Table2,
+    triangle: Triangle,
+    typescript: SquareTerminal,
+    wind: Wind,
+};
+
+function getIcon(item: SkillItem): Component {
+    return item.logo ? iconMap[item.logo] ?? Code : Code;
+}
 </script>
 
 <template>
@@ -20,12 +94,10 @@ const { isActiveSection } = useSectionSlide('skills');
                     :style="{ transitionDelay: `${0.08 * i}s` }"
                 >
                     <h3 class="title">{{ group.title }}</h3>
-                    <div class="marquee">
-                        <div class="track">
-                            <span v-for="n in 2" :key="n" class="set">
-                                <span v-for="item in group.items" :key="`${n}-${item.name}`" class="pill">{{ item.name }}</span>
-                            </span>
-                        </div>
+                    <div class="icon-grid">
+                        <span v-for="item in group.items" :key="item.name" class="icon-tile" :aria-label="item.name" :title="item.name">
+                            <component :is="getIcon(item)" class="icon" aria-hidden="true" />
+                        </span>
                     </div>
                 </article>
             </div>
@@ -40,9 +112,11 @@ const { isActiveSection } = useSectionSlide('skills');
 }
 
 .section-inner {
-    width: min(980px, 100%);
-    margin: 0 auto;
-    padding: 0 clamp(1.25rem, 5vw, 2rem);
+    width: 100%;
+    padding: 0 15px;
+    padding-inline: clamp(15px, 8vw, 140px);
+    max-width: 1600px;
+    margin-inline: auto;
 }
 
 .eyebrow {
@@ -55,14 +129,14 @@ const { isActiveSection } = useSectionSlide('skills');
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 0.9rem;
 }
 
 .card {
     border: 1px solid var(--line);
     border-radius: 12px;
-    padding: 1.1rem 1.25rem;
+    padding: 1rem;
     background: var(--panel);
     opacity: 0;
     transform: translateY(10px);
@@ -86,48 +160,42 @@ const { isActiveSection } = useSectionSlide('skills');
     color: var(--signal);
 }
 
-.marquee {
-    margin-top: 0.8rem;
-    overflow: hidden;
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+.icon-grid {
+    margin-top: 0.85rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 48px);
+    gap: 0.55rem;
 }
 
-.track {
-    display: flex;
-    width: max-content;
-    animation: scroll 22s linear infinite;
-}
-
-.marquee:hover .track {
-    animation-play-state: paused;
-}
-
-.set {
-    display: flex;
-    gap: 0.5rem;
-    padding-right: 0.5rem;
-}
-
-.pill {
-    flex-shrink: 0;
-    font-size: 0.8rem;
-    color: var(--paper);
-    padding: 0.4rem 0.85rem;
+.icon-tile {
+    display: grid;
+    place-items: center;
+    min-height: 48px;
     border: 1px solid var(--line);
-    border-radius: 999px;
+    border-radius: 10px;
     background: var(--panel-2);
+    color: var(--paper);
+    transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 
-@keyframes scroll {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
+.icon-tile:hover {
+    transform: translateY(-2px);
+    border-color: var(--signal-dim);
+    color: var(--signal);
+}
+
+.icon {
+    width: 21px;
+    height: 21px;
+}
+
+@media (max-width: 980px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-@media (max-width: 780px) {
+@media (max-width: 620px) {
     .grid {
         grid-template-columns: 1fr;
     }
@@ -139,8 +207,9 @@ const { isActiveSection } = useSectionSlide('skills');
         opacity: 1;
         transform: none;
     }
-    .track {
-        animation: none;
+
+    .icon-tile {
+        transition: none;
     }
 }
 </style>

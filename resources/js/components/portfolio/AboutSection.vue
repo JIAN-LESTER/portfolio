@@ -38,9 +38,11 @@ const { isActiveSection } = useSectionSlide('about');
 }
 
 .section-inner {
-    width: min(980px, 100%);
-    margin: 0 auto;
-    padding: 0 clamp(1.25rem, 5vw, 2rem);
+    width: 100%;
+    padding: 0 15px;
+    padding-inline: clamp(15px, 8vw, 140px);
+    max-width: 1600px;
+    margin-inline: auto;
 }
 
 .eyebrow {
