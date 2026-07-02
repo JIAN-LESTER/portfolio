@@ -59,16 +59,13 @@ onMounted(() => {
                 showResult.value = true;
                 typeLine(fullResult, resultLine, 30, () => {
                     window.setTimeout(() => {
-                        window.setTimeout(
-                            () => {
-                                showTerminal.value = false;
-                                window.setTimeout(
-                                    () => (showIdentity.value = true),
-                                    250,
-                                );
-                            },
-                            600,
-                        );
+                        window.setTimeout(() => {
+                            showTerminal.value = false;
+                            window.setTimeout(
+                                () => (showIdentity.value = true),
+                                250,
+                            );
+                        }, 600);
                     }, 250);
                 });
             }, 350);
@@ -79,6 +76,7 @@ onMounted(() => {
 
 <template>
     <section
+        v-cloak
         class="stage-section hero"
         :class="{ 'is-active': isActiveSection }"
     >
@@ -176,7 +174,11 @@ onMounted(() => {
 }
 
 .terminal-fade-leave-active {
-    transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, margin-bottom 0.4s ease;
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease,
+        max-height 0.4s ease,
+        margin-bottom 0.4s ease;
     overflow: hidden;
     max-height: 220px;
 }
