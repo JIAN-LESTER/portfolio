@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { useSectionSlide } from '@/composables/useScrollStage';
+import { computed, onMounted, ref } from 'vue';
+import { useScrollStage, useSectionSlide } from '@/composables/useScrollStage';
 import type { PersonalInfo } from '@/types/portfolio';
 
 defineProps<{ personal: PersonalInfo }>();
 
 const { isActiveSection } = useSectionSlide('hero');
+const stage = useScrollStage();
 
 const query = ref('');
 const resultLine = ref('');
@@ -21,6 +22,16 @@ const reducedMotion =
     typeof window !== 'undefined' && window.matchMedia
         ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
         : false;
+
+const resumeSectionIndex = computed(() =>
+    stage.state.sections.findIndex((section) => section.id === 'resume'),
+);
+
+function goToResume() {
+    if (resumeSectionIndex.value >= 0) {
+        stage.goToSection(resumeSectionIndex.value);
+    }
+}
 
 function typeLine(
     text: string,
@@ -132,9 +143,8 @@ onMounted(() => {
                         <a
                             v-if="personal.resumeUrl"
                             class="btn btn-ghost"
-                            :href="personal.resumeUrl"
-                            target="_blank"
-                            rel="noreferrer"
+                            href="#resume"
+                            @click.prevent="goToResume"
                             >View resume</a
                         >
                         <a
