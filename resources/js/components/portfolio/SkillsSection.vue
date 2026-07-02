@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Component } from 'vue';
 import {
     Atom,
     Blocks,
@@ -32,12 +31,39 @@ import {
     Triangle,
     Wind,
 } from 'lucide-vue-next';
+import * as si from 'simple-icons/icons';
+import type { Component } from 'vue';
 import { useSectionSlide } from '@/composables/useScrollStage';
 import type { SkillGroup, SkillItem } from '@/types/portfolio';
 
 defineProps<{ skills: SkillGroup[] }>();
 
 const { isActiveSection } = useSectionSlide('skills');
+
+const brandMap: Record<string, { path: string; hex: string }> = {
+    react: si.siReact,
+    typescript: si.siTypescript,
+    javascript: si.siJavascript,
+    php: si.siPhp,
+    laravel: si.siLaravel,
+    python: si.siPython,
+    nextjs: si.siNextdotjs,
+    firebase: si.siFirebase,
+    flame: si.siFirebase,
+    github: si.siGithub,
+    dart: si.siDart,
+    wind: si.siTailwindcss,
+    figma: si.siFigma,
+    'pen-tool': si.siFigma,
+    database: si.siMysql, // swap per stack if needed
+    container: si.siDocker,
+    smartphone: si.siFlutter, // swap per stack if needed
+    vue: si.siVuedotjs,
+};
+
+function getBrand(item: SkillItem) {
+    return item.logo ? brandMap[item.logo] : undefined;
+}
 
 const iconMap: Record<string, Component> = {
     api: Network,
@@ -77,12 +103,15 @@ const iconMap: Record<string, Component> = {
 };
 
 function getIcon(item: SkillItem): Component {
-    return item.logo ? iconMap[item.logo] ?? Code : Code;
+    return item.logo ? (iconMap[item.logo] ?? Code) : Code;
 }
 </script>
 
 <template>
-    <section class="stage-section skills" :class="{ 'is-active': isActiveSection }">
+    <section
+        class="stage-section skills"
+        :class="{ 'is-active': isActiveSection }"
+    >
         <div class="section-inner">
             <p class="eyebrow">RECORD 06 / 07 &middot; SKILLS</p>
 
@@ -95,8 +124,30 @@ function getIcon(item: SkillItem): Component {
                 >
                     <h3 class="title">{{ group.title }}</h3>
                     <div class="icon-grid">
-                        <span v-for="item in group.items" :key="item.name" class="icon-tile" :aria-label="item.name" :title="item.name">
-                            <component :is="getIcon(item)" class="icon" aria-hidden="true" />
+                        <span
+                            v-for="item in group.items"
+                            :key="item.name"
+                            class="icon-tile"
+                        >
+                            <span class="icon-visual">
+                                <svg
+                                    v-if="getBrand(item)"
+                                    viewBox="0 0 24 24"
+                                    class="icon icon--brand"
+                                    :style="{
+                                        '--brand-color': `#${getBrand(item)!.hex}`,
+                                    }"
+                                >
+                                    <path :d="getBrand(item)!.path" />
+                                </svg>
+                                <component
+                                    :is="getIcon(item)"
+                                    v-else
+                                    class="icon"
+                                    aria-hidden="true"
+                                />
+                            </span>
+                            <span class="icon-name">{{ item.name }}</span>
                         </span>
                     </div>
                 </article>
@@ -138,9 +189,12 @@ function getIcon(item: SkillItem): Component {
     border-radius: 12px;
     padding: 1rem;
     background: var(--panel);
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s ease;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease,
+        border-color 0.2s ease;
 }
 
 .is-active .card {
@@ -163,19 +217,63 @@ function getIcon(item: SkillItem): Component {
 .icon-grid {
     margin-top: 0.85rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 48px);
-    gap: 0.55rem;
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    gap: 0.6rem;
 }
 
 .icon-tile {
-    display: grid;
-    place-items: center;
-    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.75rem 0.4rem;
     border: 1px solid var(--line);
     border-radius: 10px;
     background: var(--panel-2);
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.icon-tile:hover {
+    transform: translateY(-3px);
+    border-color: var(--signal-dim);
+    background: var(--panel);
+}
+
+.icon-visual {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+}
+
+.icon {
+    width: 22px;
+    height: 22px;
     color: var(--paper);
-    transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    transition: color 0.18s ease;
+}
+
+.icon--brand {
+    fill: var(--brand-color, var(--paper));
+    opacity: 0.85;
+    transition: opacity 0.18s ease;
+}
+
+.icon-tile:hover .icon--brand {
+    opacity: 1;
+}
+
+.icon-tile:hover .icon {
+    color: var(--signal);
+}
+
+.icon-name {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+    color: var(--depth);
+    text-align: center;
+    line-height: 1.2;
 }
 
 .icon-tile:hover {
