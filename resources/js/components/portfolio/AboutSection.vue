@@ -1,24 +1,145 @@
 <script setup lang="ts">
+import { useSectionSlide } from '@/composables/useScrollStage';
 import type { PersonalInfo } from '@/types/portfolio';
 
-defineProps<{
-    personal: PersonalInfo;
-}>();
+defineProps<{ personal: PersonalInfo }>();
+
+const { isActiveSection } = useSectionSlide('about');
 </script>
 
 <template>
-    <section
-        id="about"
-        class="scroll-mt-24 rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl shadow-black/10 backdrop-blur"
-    >
-        <p class="text-sm font-semibold uppercase tracking-[0.35em] text-cyan-300">
-            About
-        </p>
-        <h2 class="mt-4 text-3xl font-semibold text-white sm:text-4xl">
-            Building useful, clean, and responsive digital products
-        </h2>
-        <p class="mt-6 max-w-3xl text-base leading-8 text-slate-300">
-            {{ personal.bio }}
-        </p>
+    <section class="stage-section about" :class="{ 'is-active': isActiveSection }">
+        <div class="section-inner">
+            <p class="eyebrow">RECORD 02 / 07 &middot; ABOUT</p>
+
+            <div class="grid">
+                <h2 class="headline">
+                    I don&rsquo;t just ship features &mdash;<br />
+                    I ship the <span>system</span> underneath them.
+                </h2>
+
+                <div class="copy">
+                    <p>{{ personal.bio }}</p>
+                    <ul class="facts">
+                        <li><span class="k">Base</span><span class="v">{{ personal.location }}</span></li>
+                        <li v-if="personal.availability"><span class="k">Status</span><span class="v signal">{{ personal.availability }}</span></li>
+                        <li><span class="k">Focus</span><span class="v">Web &middot; Mobile &middot; AI retrieval</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 </template>
+
+<style scoped>
+.about {
+    display: flex;
+    align-items: center;
+}
+
+.section-inner {
+    width: min(980px, 100%);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 2rem);
+}
+
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--depth);
+    margin-bottom: 1.75rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+}
+
+.headline {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    line-height: 1.25;
+    color: var(--paper);
+    opacity: 0;
+    transform: translateY(14px);
+}
+
+.headline span {
+    color: var(--signal);
+}
+
+.is-active .headline {
+    animation: rise 0.7s ease-out 0.1s forwards;
+}
+
+.copy {
+    opacity: 0;
+    transform: translateY(14px);
+}
+
+.is-active .copy {
+    animation: rise 0.7s ease-out 0.3s forwards;
+}
+
+.copy p {
+    color: var(--muted);
+    line-height: 1.75;
+    font-size: 1rem;
+}
+
+.facts {
+    margin-top: 1.75rem;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1.25rem;
+}
+
+.facts li {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+}
+
+.k {
+    color: var(--muted);
+}
+
+.v {
+    color: var(--paper);
+}
+
+.v.signal {
+    color: var(--signal);
+}
+
+@keyframes rise {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 780px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .headline,
+    .copy {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
+}
+</style>

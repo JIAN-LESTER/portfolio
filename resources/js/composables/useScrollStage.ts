@@ -44,7 +44,10 @@ export function provideScrollStage(sections: StageSection[]) {
     }
 
     function navigate(dir: 1 | -1) {
-        if (state.isAnimating) return;
+        if (state.isAnimating) {
+return;
+}
+
         const secIndex = state.activeSection;
         const sec = state.sections[secIndex];
         const curSlide = state.activeSlide[secIndex];
@@ -53,20 +56,25 @@ export function provideScrollStage(sections: StageSection[]) {
             if (curSlide < sec.slides - 1) {
                 state.activeSlide[secIndex] = curSlide + 1;
                 lock();
+
                 return;
             }
+
             if (secIndex < state.sections.length - 1) {
                 state.activeSection = secIndex + 1;
                 lock();
             }
+
             return;
         }
 
         if (curSlide > 0) {
             state.activeSlide[secIndex] = curSlide - 1;
             lock();
+
             return;
         }
+
         if (secIndex > 0) {
             state.activeSection = secIndex - 1;
             state.activeSlide[secIndex - 1] = state.sections[secIndex - 1].slides - 1;
@@ -75,33 +83,57 @@ export function provideScrollStage(sections: StageSection[]) {
     }
 
     function navigateSlide(dir: 1 | -1) {
-        if (state.isAnimating) return;
+        if (state.isAnimating) {
+return;
+}
+
         const secIndex = state.activeSection;
         const sec = state.sections[secIndex];
         const next = state.activeSlide[secIndex] + dir;
-        if (next < 0 || next > sec.slides - 1) return;
+
+        if (next < 0 || next > sec.slides - 1) {
+return;
+}
+
         state.activeSlide[secIndex] = next;
         lock();
     }
 
     function goToSection(index: number) {
-        if (state.isAnimating || index === state.activeSection) return;
-        if (index < 0 || index >= state.sections.length) return;
+        if (state.isAnimating || index === state.activeSection) {
+return;
+}
+
+        if (index < 0 || index >= state.sections.length) {
+return;
+}
+
         state.activeSection = index;
         lock();
     }
 
     function goToSlide(index: number) {
-        if (state.isAnimating) return;
+        if (state.isAnimating) {
+return;
+}
+
         const sec = state.sections[state.activeSection];
-        if (index < 0 || index >= sec.slides) return;
+
+        if (index < 0 || index >= sec.slides) {
+return;
+}
+
         state.activeSlide[state.activeSection] = index;
         lock();
     }
 
     function onWheel(e: WheelEvent) {
         e.preventDefault();
-        if (Math.abs(e.deltaY) < 4) return;
+
+        if (Math.abs(e.deltaY) < 4) {
+return;
+}
+
         navigate(e.deltaY > 0 ? 1 : -1);
     }
 
@@ -117,8 +149,11 @@ export function provideScrollStage(sections: StageSection[]) {
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
         const threshold = 48;
+
         if (Math.abs(dx) > Math.abs(dy)) {
-            if (Math.abs(dx) > threshold) navigateSlide(dx < 0 ? 1 : -1);
+            if (Math.abs(dx) > threshold) {
+navigateSlide(dx < 0 ? 1 : -1);
+}
         } else if (Math.abs(dy) > threshold) {
             navigate(dy < 0 ? 1 : -1);
         }
@@ -181,14 +216,17 @@ export function provideScrollStage(sections: StageSection[]) {
     };
 
     provide(STAGE_KEY, api);
+
     return api;
 }
 
 export function useScrollStage() {
     const stage = inject<ReturnType<typeof provideScrollStage>>(STAGE_KEY);
+
     if (!stage) {
         throw new Error('useScrollStage() must be called inside a tree wrapped by provideScrollStage()');
     }
+
     return stage;
 }
 
@@ -206,13 +244,19 @@ export function useSectionSlide(id: string) {
     const isActiveSection = computed(() => stage.state.activeSection === index.value);
 
     function next() {
-        if (isActiveSection.value) stage.navigateSlide(1);
+        if (isActiveSection.value) {
+stage.navigateSlide(1);
+}
     }
     function prev() {
-        if (isActiveSection.value) stage.navigateSlide(-1);
+        if (isActiveSection.value) {
+stage.navigateSlide(-1);
+}
     }
     function goTo(i: number) {
-        if (isActiveSection.value) stage.goToSlide(i);
+        if (isActiveSection.value) {
+stage.goToSlide(i);
+}
     }
 
     return { active, count, isActiveSection, next, prev, goTo };

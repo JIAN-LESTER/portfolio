@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import BackgroundField from '@/components/portfolio/BackgroundField.vue';
 import SectionNav from '@/components/portfolio/SectionNav.vue';
-import { provideScrollStage, type StageSection } from '@/composables/useScrollStage';
+import { provideScrollStage  } from '@/composables/useScrollStage';
+import type {StageSection} from '@/composables/useScrollStage';
 import { portfolioData } from '@/data/portfolio';
-import { computed } from 'vue';
 
 const sections: StageSection[] = [
     { id: 'hero', label: 'Hero', slides: 1 },
