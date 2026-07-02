@@ -11,7 +11,7 @@ export const portfolioData: PortfolioData = {
         availability: 'Available August · open to remote work in July',
         email: 'tabarno.jian@gmail.com',
         github: 'https://github.com/JIAN-LESTER',
-        linkedin: 'https://linkedin.com/in/jianlestertabarno',
+        linkedin: 'https://www.linkedin.com/in/jian-lester-tabarno/',
         website: 'https://jianlester.dev',
         image: '/images/profile.jpg',
         resumeUrl: '/images/Jian_Tabarno_Resume.pdf',
@@ -90,7 +90,7 @@ export const portfolioData: PortfolioData = {
             ],
         },
         {
-            code: 'MOB',
+            code: 'MOBILE',
             title: 'Mobile App Development',
             description:
                 'Cross-platform apps in Flutter that share logic across iOS and Android without feeling like a compromise.',
