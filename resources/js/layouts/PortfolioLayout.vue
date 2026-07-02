@@ -1,32 +1,163 @@
+<script setup lang="ts">
+import BackgroundField from '@/components/portfolio/BackgroundField.vue';
+import SectionNav from '@/components/portfolio/SectionNav.vue';
+import { provideScrollStage, type StageSection } from '@/composables/useScrollStage';
+import { portfolioData } from '@/data/portfolio';
+import { computed } from 'vue';
+
+const sections: StageSection[] = [
+    { id: 'hero', label: 'Hero', slides: 1 },
+    { id: 'about', label: 'About', slides: 1 },
+    { id: 'journey', label: 'Journey', slides: 2 },
+    { id: 'projects', label: 'Projects', slides: portfolioData.projects.length },
+    { id: 'services', label: 'Services', slides: portfolioData.services.length },
+    { id: 'skills', label: 'Skills', slides: 1 },
+    { id: 'contact', label: 'Contact', slides: 1 },
+];
+
+const stage = provideScrollStage(sections);
+
+const trackStyle = computed(() => ({
+    transform: `translateY(calc(var(--vh, 1vh) * -100 * ${stage.state.activeSection}))`,
+}));
+</script>
+
 <template>
-    <div class="min-h-screen scroll-smooth bg-[radial-gradient(circle_at_top,_#164e63,_#020617_45%)] text-slate-100">
-        <header class="sticky top-0 z-20 border-b border-white/10 bg-slate-950/80 backdrop-blur">
-            <div class="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-4 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-10">
-                <a href="#hero" class="shrink-0">
-                    <p class="text-xs font-semibold uppercase tracking-[0.35em] text-cyan-300">
-                        Portfolio
-                    </p>
-                    <h1 class="mt-1 text-xl font-semibold text-white">
-                        Jian Lester Tabarno
-                    </h1>
-                </a>
+    <div class="stage">
+        <BackgroundField />
 
-                <nav class="flex w-full gap-5 overflow-x-auto pb-1 text-sm whitespace-nowrap text-slate-300 md:w-auto md:gap-6 md:pb-0">
-                    <a href="#hero" class="transition hover:text-white focus:text-white">Home</a>
-                    <a href="#about" class="transition hover:text-white focus:text-white">About</a>
-                    <a href="#education" class="transition hover:text-white focus:text-white">Education</a>
-                    <a href="#projects" class="transition hover:text-white focus:text-white">Projects</a>
-                    <a href="#services" class="transition hover:text-white focus:text-white">Services</a>
-                    <a href="#skills" class="transition hover:text-white focus:text-white">Skills</a>
-                    <a href="#contact" class="transition hover:text-white focus:text-white">Contact</a>
-                </nav>
-            </div>
-        </header>
+        <a href="#hero" class="brand" @click.prevent="stage.goToSection(0)">
+            <span class="brand-mark">JLT</span>
+            <span class="brand-name">Jian Lester Tabarno</span>
+        </a>
 
-        <div class="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 sm:px-8 lg:px-10">
-            <main class="flex-1 pb-12">
-                <slot />
-            </main>
+        <SectionNav :sections="sections" :active="stage.state.activeSection" @go="stage.goToSection" />
+
+        <div class="stage-track" :style="trackStyle">
+            <slot />
         </div>
     </div>
 </template>
+
+<style>
+/* Global tokens — intentionally unscoped so every portfolio section can use them. */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    --ink: #0b0e12;
+    --panel: #151a21;
+    --panel-2: #1b222b;
+    --line: #262f3a;
+    --paper: #ede9e2;
+    --muted: #8b93a1;
+    --signal: #f5a623;
+    --signal-dim: #7a5518;
+    --depth: #6c7bff;
+    --depth-dim: #2e3468;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+html.stage-lock,
+html.stage-lock body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+    background: var(--ink);
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--paper);
+}
+
+/* Shared section sizing — each portfolio section component renders its own
+   root <section class="stage-section">, sized here so the layout can page
+   through them by translating .stage-track. */
+.stage-section {
+    position: relative;
+    width: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+    flex-shrink: 0;
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0.32;
+    filter: saturate(0.55) brightness(0.85);
+    transition: opacity 0.7s ease, filter 0.7s ease;
+}
+
+.stage-section.is-active {
+    opacity: 1;
+    filter: saturate(1) brightness(1);
+}
+
+*:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stage-section {
+        transition: none;
+    }
+}
+</style>
+
+<style scoped>
+.stage {
+    position: fixed;
+    inset: 0;
+    background: var(--ink);
+    overflow: hidden;
+}
+
+.stage-track {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+}
+
+.brand {
+    position: fixed;
+    top: clamp(1rem, 3vw, 1.75rem);
+    left: clamp(1rem, 3vw, 2rem);
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+}
+
+.brand-mark {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    background: var(--signal);
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+}
+
+.brand-name {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 720px) {
+    .brand-name {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stage-track {
+        transition: none;
+    }
+}
+</style>
