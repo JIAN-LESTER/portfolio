@@ -30,7 +30,7 @@ const { isActiveSection } = useSectionSlide('resume');
                             v-if="personal.resumeUrl"
                             class="btn btn-primary"
                             :href="personal.resumeUrl"
-                            download="jiantabarnoresumepdf"
+                            download="Tabarno_Resume"
                         >
                             Download resume
                         </a>
@@ -150,7 +150,7 @@ const { isActiveSection } = useSectionSlide('resume');
 }
 
 .preview-frame {
-    width: min(100%, 520px);
+    width: min(100%, 620px);
     max-width: 100%;
     margin-left: auto;
     border: 1px solid var(--line);
@@ -179,7 +179,7 @@ const { isActiveSection } = useSectionSlide('resume');
     }
 
     .preview-frame {
-        width: min(100%, 360px);
+        width: min(100%, 420px);
         margin-inline: 0 auto;
     }
 }

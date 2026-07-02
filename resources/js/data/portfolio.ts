@@ -14,7 +14,7 @@ export const portfolioData: PortfolioData = {
         linkedin: 'https://linkedin.com/in/jianlestertabarno',
         website: 'https://jianlester.dev',
         image: '/images/profile.jpg',
-        resumeUrl: '/resume/Jian_Tabarno_Resume.pdf',
+        resumeUrl: '/images/Jian_Tabarno_Resume.pdf',
     },
 
     education: {
