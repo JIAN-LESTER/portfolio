@@ -5,31 +5,67 @@ import PaginationDots from './PaginationDots.vue';
 
 defineProps<{ projects: ProjectItem[] }>();
 
-const { active, count, isActiveSection, next, prev, goTo } = useSectionSlide('projects');
+const { active, count, isActiveSection, next, prev, goTo } =
+    useSectionSlide('projects');
 </script>
 
 <template>
-    <section class="stage-section projects" :class="{ 'is-active': isActiveSection }">
+    <section
+        class="stage-section projects"
+        :class="{ 'is-active': isActiveSection }"
+    >
         <div class="section-inner">
             <div class="head-row">
                 <p class="eyebrow">RECORD 04 / 07 &middot; PROJECTS</p>
-                <PaginationDots :count="count" :active="active" @prev="prev" @next="next" @go="goTo" />
+                <PaginationDots
+                    :count="count"
+                    :active="active"
+                    @prev="prev"
+                    @next="next"
+                    @go="goTo"
+                />
             </div>
 
-            <div class="track" :style="{ transform: `translateX(-${active * 100}%)` }">
-                <article v-for="(project, i) in projects" :key="project.title" class="slide">
-                    <span class="kicker">{{ String(i + 1).padStart(2, '0') }} &middot; {{ project.tag.toUpperCase() }}</span>
+            <div
+                class="track"
+                :style="{ transform: `translateX(-${active * 100}%)` }"
+            >
+                <article
+                    v-for="(project, i) in projects"
+                    :key="project.title"
+                    class="slide"
+                >
+                    <span class="kicker"
+                        >{{ String(i + 1).padStart(2, '0') }} &middot;
+                        {{ project.tag.toUpperCase() }}</span
+                    >
                     <h3 class="title">{{ project.title }}</h3>
                     <p class="summary">{{ project.summary }}</p>
                     <p class="desc">{{ project.description }}</p>
 
                     <ul class="stack">
-                        <li v-for="tech in project.stack" :key="tech">{{ tech }}</li>
+                        <li v-for="tech in project.stack" :key="tech">
+                            {{ tech }}
+                        </li>
                     </ul>
 
                     <div class="links" v-if="project.github || project.live">
-                        <a v-if="project.github" :href="project.github" target="_blank" rel="noreferrer" class="link">Source &rarr;</a>
-                        <a v-if="project.live" :href="project.live" target="_blank" rel="noreferrer" class="link">Live &rarr;</a>
+                        <a
+                            v-if="project.github"
+                            :href="project.github"
+                            target="_blank"
+                            rel="noreferrer"
+                            class="link"
+                            >Source &rarr;</a
+                        >
+                        <a
+                            v-if="project.live"
+                            :href="project.live"
+                            target="_blank"
+                            rel="noreferrer"
+                            class="link"
+                            >Live &rarr;</a
+                        >
                     </div>
                 </article>
             </div>
@@ -133,7 +169,9 @@ const { active, count, isActiveSection, next, prev, goTo } = useSectionSlide('pr
     border: 1px solid var(--line);
     border-radius: 999px;
     color: var(--muted);
-    transition: border-color 0.2s ease, color 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .slide:hover .stack li {
@@ -153,7 +191,9 @@ const { active, count, isActiveSection, next, prev, goTo } = useSectionSlide('pr
     text-decoration: none;
     border-bottom: 1px solid var(--line);
     padding-bottom: 2px;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .link:hover {

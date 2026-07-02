@@ -20,7 +20,10 @@ defineOptions({
 
     <HeroSection :personal="portfolioData.personal" />
     <AboutSection :personal="portfolioData.personal" />
-    <JourneySection :education="portfolioData.education" :experience="portfolioData.experience" />
+    <JourneySection
+        :education="portfolioData.education"
+        :experience="portfolioData.experience"
+    />
     <ProjectsSection :projects="portfolioData.projects" />
     <ServicesSection :services="portfolioData.services" />
     <SkillsSection :skills="portfolioData.skills" />

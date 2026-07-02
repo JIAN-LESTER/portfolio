@@ -2,16 +2,24 @@
 import { computed } from 'vue';
 import BackgroundField from '@/components/portfolio/BackgroundField.vue';
 import SectionNav from '@/components/portfolio/SectionNav.vue';
-import { provideScrollStage  } from '@/composables/useScrollStage';
-import type {StageSection} from '@/composables/useScrollStage';
+import { provideScrollStage } from '@/composables/useScrollStage';
+import type { StageSection } from '@/composables/useScrollStage';
 import { portfolioData } from '@/data/portfolio';
 
 const sections: StageSection[] = [
     { id: 'hero', label: 'Hero', slides: 1 },
     { id: 'about', label: 'About', slides: 1 },
     { id: 'journey', label: 'Journey', slides: 2 },
-    { id: 'projects', label: 'Projects', slides: portfolioData.projects.length },
-    { id: 'services', label: 'Services', slides: portfolioData.services.length },
+    {
+        id: 'projects',
+        label: 'Projects',
+        slides: portfolioData.projects.length,
+    },
+    {
+        id: 'services',
+        label: 'Services',
+        slides: portfolioData.services.length,
+    },
     { id: 'skills', label: 'Skills', slides: 1 },
     { id: 'contact', label: 'Contact', slides: 1 },
 ];
@@ -32,7 +40,11 @@ const trackStyle = computed(() => ({
             <span class="brand-name">Jian Lester Tabarno</span>
         </a>
 
-        <SectionNav :sections="sections" :active="stage.state.activeSection" @go="stage.goToSection" />
+        <SectionNav
+            :sections="sections"
+            :active="stage.state.activeSection"
+            @go="stage.goToSection"
+        />
 
         <div class="stage-track" :style="trackStyle">
             <slot />
@@ -87,7 +99,9 @@ body {
     z-index: 1;
     opacity: 0.32;
     filter: saturate(0.55) brightness(0.85);
-    transition: opacity 0.7s ease, filter 0.7s ease;
+    transition:
+        opacity 0.7s ease,
+        filter 0.7s ease;
 }
 
 .stage-section.is-active {
@@ -98,6 +112,10 @@ body {
 *:focus-visible {
     outline: 2px solid var(--signal);
     outline-offset: 3px;
+}
+
+[v-cloak] {
+    display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

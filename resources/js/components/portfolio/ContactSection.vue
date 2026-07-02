@@ -28,17 +28,26 @@ function submitBuildRequest() {
         :class="{ 'is-active': isActiveSection }"
     >
         <div class="section-inner">
-            <div class="contact-panel rounded-3xl border border-cyan-300/20 bg-slate-950/80 p-6 shadow-2xl shadow-cyan-950/20 sm:p-8">
-                <div class="contact-inner grid gap-4 lg:grid-cols-[0.8fr_1fr] lg:items-center">
+            <div
+                class="contact-panel rounded-3xl border border-cyan-300/20 bg-slate-950/80 p-6 shadow-2xl shadow-cyan-950/20 sm:p-8"
+            >
+                <div
+                    class="contact-inner grid gap-4 lg:grid-cols-[0.8fr_1fr] lg:items-center"
+                >
                     <div class="contact-copy">
-                        <p class="text-sm font-semibold uppercase tracking-[0.35em] text-cyan-200">
+                        <p
+                            class="text-sm font-semibold tracking-[0.35em] text-cyan-200 uppercase"
+                        >
                             Contact
                         </p>
-                        <h2 class="mt-4 text-3xl font-semibold text-white sm:text-4xl">
+                        <h2
+                            class="mt-4 text-3xl font-semibold text-white sm:text-4xl"
+                        >
                             Let&rsquo;s build something meaningful together
                         </h2>
                         <p class="mt-4 text-base leading-7 text-slate-300">
-                            Tell me what you want built, from a website or mobile app to a custom system or AI-powered feature.
+                            Tell me what you want built, from a website or
+                            mobile app to a custom system or AI-powered feature.
                         </p>
 
                         <div class="mt-6 flex flex-wrap gap-3 text-sm">
@@ -74,7 +83,10 @@ function submitBuildRequest() {
                         @submit.prevent="submitBuildRequest"
                     >
                         <div>
-                            <label for="build-request" class="text-sm font-medium text-white">
+                            <label
+                                for="build-request"
+                                class="text-sm font-medium text-white"
+                            >
                                 What do you want me to build?
                             </label>
                             <textarea
@@ -84,18 +96,26 @@ function submitBuildRequest() {
                                 required
                                 minlength="10"
                                 maxlength="3000"
-                                class="request-field mt-3 w-full resize-y rounded-2xl border border-white/15 bg-slate-900/90 px-4 py-3 text-sm leading-6 text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20"
+                                class="request-field mt-3 w-full resize-y rounded-2xl border border-white/15 bg-slate-900/90 px-4 py-3 text-sm leading-6 text-white placeholder:text-slate-500 focus:border-cyan-200 focus:ring-2 focus:ring-cyan-200/20 focus:outline-none"
                                 placeholder="Describe the website, app, feature, or system you want built."
                             />
-                            <p v-if="form.errors.message" class="status-message mt-3 text-sm text-red-200">
+                            <p
+                                v-if="form.errors.message"
+                                class="status-message mt-3 text-sm text-red-200"
+                            >
                                 {{ form.errors.message }}
                             </p>
-                            <p v-else-if="form.wasSuccessful" class="status-message success-message mt-3 text-sm text-cyan-100">
+                            <p
+                                v-else-if="form.wasSuccessful"
+                                class="status-message success-message mt-3 text-sm text-cyan-100"
+                            >
                                 Your request was sent.
                             </p>
                         </div>
 
-                        <div class="mt-5 flex items-center justify-between gap-4">
+                        <div
+                            class="mt-5 flex items-center justify-between gap-4"
+                        >
                             <span class="text-xs text-slate-400">
                                 Minimum 10 characters
                             </span>
@@ -104,7 +124,11 @@ function submitBuildRequest() {
                                 :disabled="form.processing"
                                 class="send-button rounded-full border border-cyan-200/30 bg-cyan-300 px-5 py-2 text-sm font-medium text-slate-950 transition disabled:cursor-not-allowed disabled:opacity-60"
                             >
-                                {{ form.processing ? 'Sending...' : 'Send request' }}
+                                {{
+                                    form.processing
+                                        ? 'Sending...'
+                                        : 'Send request'
+                                }}
                             </button>
                         </div>
                     </form>
@@ -158,7 +182,11 @@ function submitBuildRequest() {
 .contact-link {
     border-width: 1px;
     border-radius: 9999px;
-    transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease;
 }
 
 .contact-link:hover,
@@ -168,7 +196,11 @@ function submitBuildRequest() {
 }
 
 .request-field {
-    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background-color 180ms ease;
 }
 
 .request-field:focus {
@@ -177,7 +209,10 @@ function submitBuildRequest() {
 }
 
 .send-button {
-    transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+    transition:
+        transform 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease;
 }
 
 .status-message {
@@ -185,7 +220,9 @@ function submitBuildRequest() {
 }
 
 .success-message {
-    animation: status-pop 220ms ease-out both, success-pulse 1200ms ease-out;
+    animation:
+        status-pop 220ms ease-out both,
+        success-pulse 1200ms ease-out;
 }
 
 @keyframes contact-rise {

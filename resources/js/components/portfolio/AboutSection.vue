@@ -8,7 +8,10 @@ const { isActiveSection } = useSectionSlide('about');
 </script>
 
 <template>
-    <section class="stage-section about" :class="{ 'is-active': isActiveSection }">
+    <section
+        class="stage-section about"
+        :class="{ 'is-active': isActiveSection }"
+    >
         <div class="section-inner">
             <p class="eyebrow">RECORD 02 / 07 &middot; ABOUT</p>
 
@@ -21,9 +24,22 @@ const { isActiveSection } = useSectionSlide('about');
                 <div class="copy">
                     <p>{{ personal.bio }}</p>
                     <ul class="facts">
-                        <li><span class="k">Base</span><span class="v">{{ personal.location }}</span></li>
-                        <li v-if="personal.availability"><span class="k">Status</span><span class="v signal">{{ personal.availability }}</span></li>
-                        <li><span class="k">Focus</span><span class="v">Web &middot; Mobile &middot; AI retrieval</span></li>
+                        <li>
+                            <span class="k">Base</span
+                            ><span class="v">{{ personal.location }}</span>
+                        </li>
+                        <li v-if="personal.availability">
+                            <span class="k">Status</span
+                            ><span class="v signal">{{
+                                personal.availability
+                            }}</span>
+                        </li>
+                        <li>
+                            <span class="k">Focus</span
+                            ><span class="v"
+                                >Web &middot; Mobile &middot; AI retrieval</span
+                            >
+                        </li>
                     </ul>
                 </div>
             </div>

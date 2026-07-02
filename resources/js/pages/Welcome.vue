@@ -11,7 +11,9 @@ const dashboardUrl = computed(() =>
 
 <template>
     <Head title="Welcome" />
-    <div class="flex min-h-screen items-center justify-center bg-background p-6">
+    <div
+        class="flex min-h-screen items-center justify-center bg-background p-6"
+    >
         <div class="w-full max-w-2xl space-y-4 text-center">
             <h1 class="text-4xl font-semibold tracking-tight">
                 Welcome to the portfolio

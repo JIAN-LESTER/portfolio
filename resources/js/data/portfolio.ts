@@ -24,7 +24,8 @@ export const portfolioData: PortfolioData = {
         start: '2022',
         end: '2026',
         honor: 'Cum Laude',
-        description: 'Graduated with a GWA of 1.551 (1.00 is highest) — coursework and thesis work centered on applied software systems rather than theory alone.',
+        description:
+            'Graduated with a GWA of 1.551 (1.00 is highest) — coursework and thesis work centered on applied software systems rather than theory alone.',
     },
 
     experience: {
@@ -43,15 +44,24 @@ export const portfolioData: PortfolioData = {
         {
             title: 'OASP Assist',
             tag: 'AI · RAG',
-            summary: 'An inquiry assistant for CMU\u2019s Office of Admissions, Scholarships & Placement.',
+            summary:
+                'An inquiry assistant for CMU\u2019s Office of Admissions, Scholarships & Placement.',
             description:
                 'Cross-platform Flutter app that answers student inquiries using retrieval-augmented generation. Pinecone handles vector search over admissions data, Gemini generates the response, and Firebase Cloud Functions (TypeScript) tie retrieval, embeddings, and real-time data together so answers stay fast and grounded instead of generic.',
-            stack: ['Flutter', 'Firebase', 'Pinecone', 'Gemini', 'RAG', 'TypeScript'],
+            stack: [
+                'Flutter',
+                'Firebase',
+                'Pinecone',
+                'Gemini',
+                'RAG',
+                'TypeScript',
+            ],
         },
         {
             title: 'Gym Management System',
             tag: 'Web · Systems',
-            summary: 'QR-based membership and operations platform for EZ Fitness Gym, Valencia, Bukidnon.',
+            summary:
+                'QR-based membership and operations platform for EZ Fitness Gym, Valencia, Bukidnon.',
             description:
                 'Laravel system covering inventory, point-of-sale, and day-to-day gym operations, built around QR-code member authentication and attendance tracking — replacing manual sign-in sheets with something the front desk actually wants to use.',
             stack: ['Laravel', 'PHP', 'Blade', 'JavaScript', 'MySQL'],
@@ -59,7 +69,8 @@ export const portfolioData: PortfolioData = {
         {
             title: 'BukCast',
             tag: 'Web · Real-time data',
-            summary: 'Real-time weather monitoring for the province of Bukidnon.',
+            summary:
+                'Real-time weather monitoring for the province of Bukidnon.',
             description:
                 'A system that collects, processes, and displays live weather data on a map and dashboard, giving a province-wide view of conditions as they change rather than a single-station snapshot.',
             stack: ['Laravel', 'PHP', 'Blade', 'JavaScript', 'MySQL'],
@@ -70,26 +81,46 @@ export const portfolioData: PortfolioData = {
         {
             code: 'WEB',
             title: 'Web Application Development',
-            description: 'End-to-end web apps built on Laravel and React/Next.js — from schema to shipped UI.',
-            deliverables: ['REST APIs', 'Authentication & dashboards', 'Responsive, production-ready front ends'],
+            description:
+                'End-to-end web apps built on Laravel and React/Next.js — from schema to shipped UI.',
+            deliverables: [
+                'REST APIs',
+                'Authentication & dashboards',
+                'Responsive, production-ready front ends',
+            ],
         },
         {
             code: 'MOB',
             title: 'Mobile App Development',
-            description: 'Cross-platform apps in Flutter that share logic across iOS and Android without feeling like a compromise.',
-            deliverables: ['Flutter / Dart builds', 'Firebase-backed sync', 'Real-device QA before release'],
+            description:
+                'Cross-platform apps in Flutter that share logic across iOS and Android without feeling like a compromise.',
+            deliverables: [
+                'Flutter / Dart builds',
+                'Firebase-backed sync',
+                'Real-device QA before release',
+            ],
         },
         {
             code: 'AI',
             title: 'AI-Powered Features & RAG',
-            description: 'Retrieval-augmented features that ground generative answers in your own data instead of guessing.',
-            deliverables: ['Pinecone vector search', 'Gemini integration', 'Embeddings & prompt tuning'],
+            description:
+                'Retrieval-augmented features that ground generative answers in your own data instead of guessing.',
+            deliverables: [
+                'Pinecone vector search',
+                'Gemini integration',
+                'Embeddings & prompt tuning',
+            ],
         },
         {
             code: 'SYS',
             title: 'Systems & Database Design',
-            description: 'The unglamorous part done right — schemas, real-time data pipelines, and integrations that hold up under load.',
-            deliverables: ['MySQL / PostgreSQL / Firestore', 'Real-time dashboards', 'QR & hardware-adjacent integrations'],
+            description:
+                'The unglamorous part done right — schemas, real-time data pipelines, and integrations that hold up under load.',
+            deliverables: [
+                'MySQL / PostgreSQL / Firestore',
+                'Real-time dashboards',
+                'QR & hardware-adjacent integrations',
+            ],
         },
     ],
 
@@ -119,7 +150,10 @@ export const portfolioData: PortfolioData = {
         },
         {
             title: 'Mobile',
-            items: [{ name: 'Dart', logo: 'dart' }, { name: 'Flutter', logo: 'smartphone' }],
+            items: [
+                { name: 'Dart', logo: 'dart' },
+                { name: 'Flutter', logo: 'smartphone' },
+            ],
         },
         {
             title: 'Databases & Cloud',

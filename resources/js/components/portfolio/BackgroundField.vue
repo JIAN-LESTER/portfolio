@@ -6,7 +6,11 @@
 
 <template>
     <div class="field" aria-hidden="true">
-        <svg class="contours" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+        <svg
+            class="contours"
+            viewBox="0 0 1200 800"
+            preserveAspectRatio="xMidYMid slice"
+        >
             <path d="M-50,120 C 200,40 400,200 650,110 S 1100,60 1250,140" />
             <path d="M-50,260 C 220,180 420,340 660,250 S 1080,190 1250,280" />
             <path d="M-50,400 C 240,320 440,480 680,390 S 1060,330 1250,420" />
@@ -58,7 +62,11 @@
 .vignette {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 30% 20%, transparent 0%, var(--ink) 78%);
+    background: radial-gradient(
+        circle at 30% 20%,
+        transparent 0%,
+        var(--ink) 78%
+    );
 }
 
 @keyframes drift {

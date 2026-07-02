@@ -8,26 +8,47 @@ defineProps<{
     experience: ExperienceItem;
 }>();
 
-const { active, count, isActiveSection, next, prev, goTo } = useSectionSlide('journey');
+const { active, count, isActiveSection, next, prev, goTo } =
+    useSectionSlide('journey');
 </script>
 
 <template>
-    <section class="stage-section journey" :class="{ 'is-active': isActiveSection }">
+    <section
+        class="stage-section journey"
+        :class="{ 'is-active': isActiveSection }"
+    >
         <div class="section-inner">
             <div class="head-row">
                 <p class="eyebrow">RECORD 03 / 07 &middot; JOURNEY</p>
-                <PaginationDots :count="count" :active="active" @prev="prev" @next="next" @go="goTo" />
+                <PaginationDots
+                    :count="count"
+                    :active="active"
+                    @prev="prev"
+                    @next="next"
+                    @go="goTo"
+                />
             </div>
 
-            <div class="track" :style="{ transform: `translateX(-${active * 100}%)` }">
+            <div
+                class="track"
+                :style="{ transform: `translateX(-${active * 100}%)` }"
+            >
                 <!-- Slide 1: Education -->
                 <div class="slide">
                     <span class="kicker">01 &middot; EDUCATION</span>
                     <h3 class="title">{{ education.school }}</h3>
-                    <p class="sub">{{ education.degree }} in {{ education.field }}</p>
-                    <p class="range">{{ education.start }} &ndash; {{ education.end }}</p>
-                    <p v-if="education.honor" class="honor">{{ education.honor }}</p>
-                    <p v-if="education.description" class="desc">{{ education.description }}</p>
+                    <p class="sub">
+                        {{ education.degree }} in {{ education.field }}
+                    </p>
+                    <p class="range">
+                        {{ education.start }} &ndash; {{ education.end }}
+                    </p>
+                    <p v-if="education.honor" class="honor">
+                        {{ education.honor }}
+                    </p>
+                    <p v-if="education.description" class="desc">
+                        {{ education.description }}
+                    </p>
                 </div>
 
                 <!-- Slide 2: Experience -->
@@ -35,9 +56,13 @@ const { active, count, isActiveSection, next, prev, goTo } = useSectionSlide('jo
                     <span class="kicker">02 &middot; EXPERIENCE</span>
                     <h3 class="title">{{ experience.company }}</h3>
                     <p class="sub">{{ experience.role }}</p>
-                    <p class="range">{{ experience.start }} &ndash; {{ experience.end }}</p>
+                    <p class="range">
+                        {{ experience.start }} &ndash; {{ experience.end }}
+                    </p>
                     <ul class="highlights">
-                        <li v-for="(h, i) in experience.highlights" :key="i">{{ h }}</li>
+                        <li v-for="(h, i) in experience.highlights" :key="i">
+                            {{ h }}
+                        </li>
                     </ul>
                 </div>
             </div>

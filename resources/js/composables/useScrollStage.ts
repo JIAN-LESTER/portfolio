@@ -1,4 +1,12 @@
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, readonly } from 'vue';
+import {
+    computed,
+    inject,
+    onBeforeUnmount,
+    onMounted,
+    provide,
+    reactive,
+    readonly,
+} from 'vue';
 
 export interface StageSection {
     id: string;
@@ -45,8 +53,8 @@ export function provideScrollStage(sections: StageSection[]) {
 
     function navigate(dir: 1 | -1) {
         if (state.isAnimating) {
-return;
-}
+            return;
+        }
 
         const secIndex = state.activeSection;
         const sec = state.sections[secIndex];
@@ -77,23 +85,24 @@ return;
 
         if (secIndex > 0) {
             state.activeSection = secIndex - 1;
-            state.activeSlide[secIndex - 1] = state.sections[secIndex - 1].slides - 1;
+            state.activeSlide[secIndex - 1] =
+                state.sections[secIndex - 1].slides - 1;
             lock();
         }
     }
 
     function navigateSlide(dir: 1 | -1) {
         if (state.isAnimating) {
-return;
-}
+            return;
+        }
 
         const secIndex = state.activeSection;
         const sec = state.sections[secIndex];
         const next = state.activeSlide[secIndex] + dir;
 
         if (next < 0 || next > sec.slides - 1) {
-return;
-}
+            return;
+        }
 
         state.activeSlide[secIndex] = next;
         lock();
@@ -101,12 +110,12 @@ return;
 
     function goToSection(index: number) {
         if (state.isAnimating || index === state.activeSection) {
-return;
-}
+            return;
+        }
 
         if (index < 0 || index >= state.sections.length) {
-return;
-}
+            return;
+        }
 
         state.activeSection = index;
         lock();
@@ -114,14 +123,14 @@ return;
 
     function goToSlide(index: number) {
         if (state.isAnimating) {
-return;
-}
+            return;
+        }
 
         const sec = state.sections[state.activeSection];
 
         if (index < 0 || index >= sec.slides) {
-return;
-}
+            return;
+        }
 
         state.activeSlide[state.activeSection] = index;
         lock();
@@ -131,8 +140,8 @@ return;
         e.preventDefault();
 
         if (Math.abs(e.deltaY) < 4) {
-return;
-}
+            return;
+        }
 
         navigate(e.deltaY > 0 ? 1 : -1);
     }
@@ -152,8 +161,8 @@ return;
 
         if (Math.abs(dx) > Math.abs(dy)) {
             if (Math.abs(dx) > threshold) {
-navigateSlide(dx < 0 ? 1 : -1);
-}
+                navigateSlide(dx < 0 ? 1 : -1);
+            }
         } else if (Math.abs(dy) > threshold) {
             navigate(dy < 0 ? 1 : -1);
         }
@@ -183,7 +192,10 @@ navigateSlide(dx < 0 ? 1 : -1);
     }
 
     function setViewportUnit() {
-        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+        document.documentElement.style.setProperty(
+            '--vh',
+            `${window.innerHeight * 0.01}px`,
+        );
     }
 
     onMounted(() => {
@@ -224,7 +236,9 @@ export function useScrollStage() {
     const stage = inject<ReturnType<typeof provideScrollStage>>(STAGE_KEY);
 
     if (!stage) {
-        throw new Error('useScrollStage() must be called inside a tree wrapped by provideScrollStage()');
+        throw new Error(
+            'useScrollStage() must be called inside a tree wrapped by provideScrollStage()',
+        );
     }
 
     return stage;
@@ -238,25 +252,31 @@ export function useScrollStage() {
  */
 export function useSectionSlide(id: string) {
     const stage = useScrollStage();
-    const index = computed(() => stage.state.sections.findIndex((s) => s.id === id));
+    const index = computed(() =>
+        stage.state.sections.findIndex((s) => s.id === id),
+    );
     const active = computed(() => stage.state.activeSlide[index.value] ?? 0);
-    const count = computed(() => stage.state.sections[index.value]?.slides ?? 1);
-    const isActiveSection = computed(() => stage.state.activeSection === index.value);
+    const count = computed(
+        () => stage.state.sections[index.value]?.slides ?? 1,
+    );
+    const isActiveSection = computed(
+        () => stage.state.activeSection === index.value,
+    );
 
     function next() {
         if (isActiveSection.value) {
-stage.navigateSlide(1);
-}
+            stage.navigateSlide(1);
+        }
     }
     function prev() {
         if (isActiveSection.value) {
-stage.navigateSlide(-1);
-}
+            stage.navigateSlide(-1);
+        }
     }
     function goTo(i: number) {
         if (isActiveSection.value) {
-stage.goToSlide(i);
-}
+            stage.goToSlide(i);
+        }
     }
 
     return { active, count, isActiveSection, next, prev, goTo };

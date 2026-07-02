@@ -5,24 +5,43 @@ import PaginationDots from './PaginationDots.vue';
 
 defineProps<{ services: ServiceItem[] }>();
 
-const { active, count, isActiveSection, next, prev, goTo } = useSectionSlide('services');
+const { active, count, isActiveSection, next, prev, goTo } =
+    useSectionSlide('services');
 </script>
 
 <template>
-    <section class="stage-section services" :class="{ 'is-active': isActiveSection }">
+    <section
+        class="stage-section services"
+        :class="{ 'is-active': isActiveSection }"
+    >
         <div class="section-inner">
             <div class="head-row">
                 <p class="eyebrow">RECORD 05 / 07 &middot; SERVICES</p>
-                <PaginationDots :count="count" :active="active" @prev="prev" @next="next" @go="goTo" />
+                <PaginationDots
+                    :count="count"
+                    :active="active"
+                    @prev="prev"
+                    @next="next"
+                    @go="goTo"
+                />
             </div>
 
-            <div class="track" :style="{ transform: `translateX(-${active * 100}%)` }">
-                <article v-for="service in services" :key="service.code" class="slide">
+            <div
+                class="track"
+                :style="{ transform: `translateX(-${active * 100}%)` }"
+            >
+                <article
+                    v-for="service in services"
+                    :key="service.code"
+                    class="slide"
+                >
                     <span class="code">{{ service.code }}</span>
                     <h3 class="title">{{ service.title }}</h3>
                     <p class="desc">{{ service.description }}</p>
                     <ul class="deliverables">
-                        <li v-for="d in service.deliverables" :key="d">{{ d }}</li>
+                        <li v-for="d in service.deliverables" :key="d">
+                            {{ d }}
+                        </li>
                     </ul>
                 </article>
             </div>

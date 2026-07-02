@@ -19,7 +19,10 @@ defineProps<{
         <p class="mt-3 text-base text-slate-200">
             {{ education.degree }} in {{ education.field }}
         </p>
-        <p v-if="education.description" class="mt-4 text-sm leading-7 text-slate-400">
+        <p
+            v-if="education.description"
+            class="mt-4 text-sm leading-7 text-slate-400"
+        >
             {{ education.description }}
         </p>
     </article>

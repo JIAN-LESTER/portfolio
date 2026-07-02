@@ -230,7 +230,10 @@ function getIcon(item: SkillItem): Component {
     border: 1px solid var(--line);
     border-radius: 10px;
     background: var(--panel-2);
-    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease;
 }
 
 .icon-tile:hover {

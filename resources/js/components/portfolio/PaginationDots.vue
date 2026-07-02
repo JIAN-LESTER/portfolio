@@ -9,7 +9,15 @@ const emit = defineEmits<{ prev: []; next: []; go: [index: number] }>();
 
 <template>
     <div v-if="count > 1" class="pager">
-        <button type="button" class="chev" :disabled="active === 0" aria-label="Previous" @click="emit('prev')">‹</button>
+        <button
+            type="button"
+            class="chev"
+            :disabled="active === 0"
+            aria-label="Previous"
+            @click="emit('prev')"
+        >
+            ‹
+        </button>
 
         <div class="dots">
             <button
@@ -23,9 +31,20 @@ const emit = defineEmits<{ prev: []; next: []; go: [index: number] }>();
             />
         </div>
 
-        <button type="button" class="chev" :disabled="active === count - 1" aria-label="Next" @click="emit('next')">›</button>
+        <button
+            type="button"
+            class="chev"
+            :disabled="active === count - 1"
+            aria-label="Next"
+            @click="emit('next')"
+        >
+            ›
+        </button>
 
-        <span class="count">{{ String(active + 1).padStart(2, '0') }} / {{ String(count).padStart(2, '0') }}</span>
+        <span class="count"
+            >{{ String(active + 1).padStart(2, '0') }} /
+            {{ String(count).padStart(2, '0') }}</span
+        >
     </div>
 </template>
 
@@ -49,7 +68,10 @@ const emit = defineEmits<{ prev: []; next: []; go: [index: number] }>();
     font-size: 1.2rem;
     line-height: 1;
     cursor: pointer;
-    transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
 }
 
 .chev:hover:not(:disabled) {
@@ -75,7 +97,9 @@ const emit = defineEmits<{ prev: []; next: []; go: [index: number] }>();
     border: none;
     background: var(--line);
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .dot.is-active {

@@ -12,7 +12,9 @@ defineProps<{
         id="education"
         class="scroll-mt-24 rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl shadow-black/10 backdrop-blur"
     >
-        <p class="text-sm font-semibold uppercase tracking-[0.35em] text-cyan-300">
+        <p
+            class="text-sm font-semibold tracking-[0.35em] text-cyan-300 uppercase"
+        >
             Education
         </p>
         <div class="mt-6 space-y-4">

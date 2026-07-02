@@ -59,14 +59,18 @@ const emit = defineEmits<{ go: [index: number] }>();
     text-align: right;
     opacity: 0;
     transform: translateX(4px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
 }
 
 .bar {
     width: 1.1rem;
     height: 2px;
     background: var(--line);
-    transition: width 0.3s ease, background-color 0.3s ease;
+    transition:
+        width 0.3s ease,
+        background-color 0.3s ease;
 }
 
 .label {
@@ -78,7 +82,9 @@ const emit = defineEmits<{ go: [index: number] }>();
     color: var(--paper);
     opacity: 0;
     transform: translateX(6px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
     pointer-events: none;
     white-space: nowrap;
 }
