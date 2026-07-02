@@ -1,87 +1,160 @@
-import type { PortfolioData } from '@/types/portfolio'
+import type { PortfolioData } from '@/types/portfolio';
 
 export const portfolioData: PortfolioData = {
-  personal: {
-    name: 'Jian Lester Tabarno',
-    role: 'IT Student | Software Developer',
-    tagline: 'I build web and mobile applications with a focus on software development, testing, UI/UX, and AI-powered data retrieval.',
-    bio: 'I am an IT student and software developer with experience in web and mobile development, software testing, UI/UX design, and AI-powered systems using RAG, Gemini, Pinecone, and NLP.',
-    email: 'jianlestertabarno2014@gmail.com',
-    phone: '09072894778',
-    location: 'Kibawe, Bukidnon, Philippines',
-    github: 'https://github.com/JIAN-LESTER',
-    linkedin: 'https://www.linkedin.com/in/jian-lester-tabarno-074139333/',
-    resumeUrl: '/resume.pdf',
-    image: '/images/profile.jpg',
-  },
+    personal: {
+        name: 'Jian Lester Tabarno',
+        role: 'Full-Stack Web & Mobile Developer',
+        tagline:
+            'I build the systems behind the answer — retrieval pipelines, real-time dashboards, and cross-platform apps that hold up once real people start using them.',
+        bio: 'BS Information Technology graduate (Cum Laude) specializing in full-stack web and mobile development. I work across Laravel, React, Flutter, Firebase, and AI-assisted retrieval — building authentication, dashboards, real-time data, APIs, and database layers that fit together as one system rather than a pile of features. Currently relocating to Singapore and looking for a team that ships.',
+        location: 'Philippines → Relocating to Singapore, Aug 2026',
+        availability: 'Available August · open to remote work in July',
+        email: 'tabarno.jian@gmail.com',
+        github: 'https://github.com/jianlester',
+        linkedin: 'https://linkedin.com/in/jianlestertabarno',
+        website: 'https://jianlester.dev',
+        resumeUrl: '/resume/Jian_Tabarno_Resume.pdf',
+    },
 
-  education: [
-    {
-      school: 'Central Mindanao University',
-      degree: 'BS',
-      field: 'Information Technology',
-      start: '2022',
-      end: '2026',
-      description: 'Cum Laude. Track: Software Development. GWA: 1.551.',
+    education: {
+        school: 'Central Mindanao University',
+        degree: 'Bachelor of Science',
+        field: 'Information Technology',
+        start: '2022',
+        end: '2026',
+        honor: 'Cum Laude',
+        description: 'Graduated with a GWA of 1.551 (1.00 is highest) — coursework and thesis work centered on applied software systems rather than theory alone.',
     },
-  ],
 
-  skills: [
-    {
-      title: 'Programming Languages',
-      items: [
-        { name: 'PHP', logo: 'https://cdn.simpleicons.org/php/777BB4' },
-        { name: 'Dart', logo: 'https://cdn.simpleicons.org/dart/0175C2' },
-        { name: 'TypeScript', logo: 'https://cdn.simpleicons.org/typescript/3178C6' },
-        { name: 'SQL', logo: 'https://cdn.simpleicons.org/sqlite/003B57' },
-        { name: 'Python', logo: 'https://cdn.simpleicons.org/python/3776AB' },
-        { name: 'Java', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg' },
-      ],
+    experience: {
+        company: 'Engagis Incorporated',
+        role: 'IT Intern / Software Tester',
+        start: 'Feb 2026',
+        end: 'May 2026',
+        highlights: [
+            'Tested internal web and mobile applications, documented issues, verified fixes, and supported QA workflows across development cycles.',
+            'Debugged web modules and shipped front-end improvements that resolved reported usability issues.',
+            'Implemented and tested mobile app features — user-facing workflows, validation, and functionality checks — before release.',
+        ],
     },
-    {
-      title: 'Frameworks',
-      items: [
-        { name: 'Laravel', logo: 'https://cdn.simpleicons.org/laravel/FF2D20' },
-        { name: 'Flutter', logo: 'https://cdn.simpleicons.org/flutter/02569B' },
-        { name: 'React', logo: 'https://cdn.simpleicons.org/react/61DAFB' },
-        { name: 'Next.js', logo: 'https://cdn.simpleicons.org/nextdotjs/FFFFFF' },
-      ],
-    },
-    {
-      title: 'Database/Cloud',
-      items: [
-        { name: 'MySQL', logo: 'https://cdn.simpleicons.org/mysql/4479A1' },
-        { name: 'PostgreSQL', logo: 'https://cdn.simpleicons.org/postgresql/4169E1' },
-        { name: 'Firebase', logo: 'https://cdn.simpleicons.org/firebase/FFCA28' },
-        { name: 'Firestore', logo: 'https://cdn.simpleicons.org/firebase/FFCA28' },
-      ],
-    },
-    {
-      title: 'AI/Tools',
-      items: [
-        { name: 'RAG' },
-        { name: 'Pinecone', logo: 'https://cdn.simpleicons.org/pinecone/000000' },
-        { name: 'Gemini', logo: 'https://cdn.simpleicons.org/googlegemini/8E75B2' },
-        { name: 'NLP' },
-      ],
-    },
-  ],
 
-  projects: [
-    {
-      title: 'OASP Assist: An Inquiry Assistant Application for CMU-OASP Using AI-Powered Data Retrieval',
-      description: 'Developed a cross-platform application for CMU-OASP using AI-driven retrieval to answer student inquiries with generative AI, embeddings, and real-time data access for fast, accurate responses across platforms.',
-      stack: ['RAG', 'Gemini', 'Pinecone', 'NLP'],
-    },
-    {
-      title: 'Gym Management System With QR Scanner Integration for EZ Fitness Gym in Valencia, Bukidnon',
-      description: 'Developed a gym management system with inventory and POS integration, featuring QR-based member authentication and attendance tracking for EZ Fitness Gym.',
-      stack: ['Laravel', 'PHP', 'MySQL'],
-    },
-    {
-      title: 'BukCast: A System Integration of Real-Time Weather Monitoring in Bukidnon',
-      description: 'Developed a web application that collects, processes, and displays real-time weather data on a map and dashboard for Bukidnon.',
-      stack: ['Web Application', 'Real-Time Data', 'Dashboard'],
-    },
-  ],
-}
+    projects: [
+        {
+            title: 'OASP Assist',
+            tag: 'AI · RAG',
+            summary: 'An inquiry assistant for CMU\u2019s Office of Admissions, Scholarships & Placement.',
+            description:
+                'Cross-platform Flutter app that answers student inquiries using retrieval-augmented generation. Pinecone handles vector search over admissions data, Gemini generates the response, and Firebase Cloud Functions (TypeScript) tie retrieval, embeddings, and real-time data together so answers stay fast and grounded instead of generic.',
+            stack: ['Flutter', 'Firebase', 'Pinecone', 'Gemini', 'RAG', 'TypeScript'],
+        },
+        {
+            title: 'Gym Management System',
+            tag: 'Web · Systems',
+            summary: 'QR-based membership and operations platform for EZ Fitness Gym, Valencia, Bukidnon.',
+            description:
+                'Laravel system covering inventory, point-of-sale, and day-to-day gym operations, built around QR-code member authentication and attendance tracking — replacing manual sign-in sheets with something the front desk actually wants to use.',
+            stack: ['Laravel', 'PHP', 'Blade', 'JavaScript', 'MySQL'],
+        },
+        {
+            title: 'BukCast',
+            tag: 'Web · Real-time data',
+            summary: 'Real-time weather monitoring for the province of Bukidnon.',
+            description:
+                'A system that collects, processes, and displays live weather data on a map and dashboard, giving a province-wide view of conditions as they change rather than a single-station snapshot.',
+            stack: ['Laravel', 'PHP', 'Blade', 'JavaScript', 'MySQL'],
+        },
+    ],
+
+    services: [
+        {
+            code: 'WEB',
+            title: 'Web Application Development',
+            description: 'End-to-end web apps built on Laravel and React/Next.js — from schema to shipped UI.',
+            deliverables: ['REST APIs', 'Authentication & dashboards', 'Responsive, production-ready front ends'],
+        },
+        {
+            code: 'MOB',
+            title: 'Mobile App Development',
+            description: 'Cross-platform apps in Flutter that share logic across iOS and Android without feeling like a compromise.',
+            deliverables: ['Flutter / Dart builds', 'Firebase-backed sync', 'Real-device QA before release'],
+        },
+        {
+            code: 'AI',
+            title: 'AI-Powered Features & RAG',
+            description: 'Retrieval-augmented features that ground generative answers in your own data instead of guessing.',
+            deliverables: ['Pinecone vector search', 'Gemini integration', 'Embeddings & prompt tuning'],
+        },
+        {
+            code: 'SYS',
+            title: 'Systems & Database Design',
+            description: 'The unglamorous part done right — schemas, real-time data pipelines, and integrations that hold up under load.',
+            deliverables: ['MySQL / PostgreSQL / Firestore', 'Real-time dashboards', 'QR & hardware-adjacent integrations'],
+        },
+    ],
+
+    skills: [
+        {
+            title: 'Backend',
+            items: [
+                { name: 'PHP' },
+                { name: 'Laravel' },
+                { name: 'REST APIs' },
+                { name: 'Firebase Functions' },
+                { name: 'Prisma' },
+                { name: 'Python' },
+                { name: 'Java' },
+            ],
+        },
+        {
+            title: 'Frontend',
+            items: [
+                { name: 'JavaScript' },
+                { name: 'TypeScript' },
+                { name: 'React' },
+                { name: 'Next.js' },
+                { name: 'Blade' },
+                { name: 'Tailwind CSS' },
+            ],
+        },
+        {
+            title: 'Mobile',
+            items: [{ name: 'Dart' }, { name: 'Flutter' }],
+        },
+        {
+            title: 'Databases & Cloud',
+            items: [
+                { name: 'MySQL' },
+                { name: 'PostgreSQL' },
+                { name: 'Firestore' },
+                { name: 'Firebase Storage' },
+                { name: 'SQL' },
+                { name: 'NoSQL' },
+            ],
+        },
+        {
+            title: 'AI & Retrieval',
+            items: [
+                { name: 'RAG' },
+                { name: 'Pinecone' },
+                { name: 'Gemini' },
+                { name: 'Embeddings' },
+                { name: 'NLP' },
+            ],
+        },
+        {
+            title: 'Design & UX',
+            items: [{ name: 'Figma' }, { name: 'Wireframing' }, { name: 'Prototyping' }, { name: 'UI Design' }],
+        },
+        {
+            title: 'Tools & Deployment',
+            items: [
+                { name: 'Git' },
+                { name: 'GitHub' },
+                { name: 'Docker' },
+                { name: 'Vercel' },
+                { name: 'Postman' },
+                { name: 'Firebase' },
+            ],
+        },
+    ],
+};
