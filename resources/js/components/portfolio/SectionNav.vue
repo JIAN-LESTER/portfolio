@@ -20,7 +20,6 @@ const emit = defineEmits<{ go: [index: number] }>();
             :aria-current="i === active ? 'true' : undefined"
             @click="emit('go', i)"
         >
-            <span class="index">{{ String(i + 1).padStart(2, '0') }}</span>
             <span class="bar"></span>
             <span class="label">{{ section.label }}</span>
         </button>
@@ -43,25 +42,13 @@ const emit = defineEmits<{ go: [index: number] }>();
 .tick {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0.2rem 0;
     color: var(--muted);
     font-family: var(--font-mono);
-}
-
-.index {
-    font-size: 0.65rem;
-    letter-spacing: 0.05em;
-    width: 1.4rem;
-    text-align: right;
-    opacity: 0;
-    transform: translateX(4px);
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+    position: relative;
 }
 
 .bar {
@@ -75,7 +62,7 @@ const emit = defineEmits<{ go: [index: number] }>();
 
 .label {
     position: absolute;
-    right: 3.2rem;
+    right: 2.2rem;
     font-size: 0.7rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -91,8 +78,7 @@ const emit = defineEmits<{ go: [index: number] }>();
 
 .tick:hover .label,
 .tick:focus-visible .label,
-.tick:hover .index,
-.tick:focus-visible .index {
+.tick.is-active .label {
     opacity: 1;
     transform: translateX(0);
 }
@@ -106,12 +92,6 @@ const emit = defineEmits<{ go: [index: number] }>();
 .tick.is-active .bar {
     width: 2.1rem;
     background: var(--signal);
-}
-
-.tick.is-active .index {
-    opacity: 1;
-    transform: translateX(0);
-    color: var(--signal);
 }
 
 .tick:focus-visible {
@@ -129,7 +109,6 @@ const emit = defineEmits<{ go: [index: number] }>();
         align-items: center;
         gap: 0.5rem;
     }
-    .index,
     .label {
         display: none;
     }
