@@ -1,83 +1,146 @@
 <script setup lang="ts">
+import { useSectionSlide } from '@/composables/useScrollStage';
 import type { SkillGroup } from '@/types/portfolio';
 
-defineProps<{
-    skills: SkillGroup[];
-}>();
+defineProps<{ skills: SkillGroup[] }>();
+
+const { isActiveSection } = useSectionSlide('skills');
 </script>
 
 <template>
-    <section
-        id="skills"
-        class="scroll-mt-24 rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl shadow-black/10 backdrop-blur"
-    >
-        <p class="text-sm font-semibold uppercase tracking-[0.35em] text-cyan-300">
-            Skills
-        </p>
-        <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            <article
-                v-for="group in skills"
-                :key="group.title"
-                class="rounded-2xl border border-white/10 bg-slate-950/40 p-6"
-            >
-                <h3 class="text-lg font-semibold text-white">
-                    {{ group.title }}
-                </h3>
-                <div class="skill-marquee mt-5 overflow-hidden">
-                    <div class="skill-track flex w-max gap-4">
-                        <div
-                            v-for="copy in 2"
-                            :key="copy"
-                            class="flex gap-4"
-                        >
-                            <div
-                                v-for="item in group.items"
-                                :key="`${copy}-${item.name}`"
-                                class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/10 p-3"
-                                :title="item.name"
-                            >
-                                <img
-                                    v-if="item.logo"
-                                    :src="item.logo"
-                                    :alt="item.name"
-                                    class="h-9 w-9 object-contain"
-                                    loading="lazy"
-                                >
-                                <span
-                                    v-else
-                                    class="text-sm font-semibold text-cyan-100"
-                                >
-                                    {{ item.name }}
-                                </span>
-                            </div>
+    <section class="stage-section skills" :class="{ 'is-active': isActiveSection }">
+        <div class="section-inner">
+            <p class="eyebrow">RECORD 06 / 07 &middot; SKILLS</p>
+
+            <div class="grid">
+                <article
+                    v-for="(group, i) in skills"
+                    :key="group.title"
+                    class="card"
+                    :style="{ transitionDelay: `${0.08 * i}s` }"
+                >
+                    <h3 class="title">{{ group.title }}</h3>
+                    <div class="marquee">
+                        <div class="track">
+                            <span v-for="n in 2" :key="n" class="set">
+                                <span v-for="item in group.items" :key="`${n}-${item.name}`" class="pill">{{ item.name }}</span>
+                            </span>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
+            </div>
         </div>
     </section>
 </template>
 
 <style scoped>
-.skill-marquee {
-    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+.skills {
+    display: flex;
+    align-items: center;
 }
 
-.skill-track {
-    animation: skill-marquee 16s linear infinite;
+.section-inner {
+    width: min(980px, 100%);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 2rem);
 }
 
-.skill-marquee:hover .skill-track {
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--depth);
+    margin-bottom: 1.75rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
+}
+
+.card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    background: var(--panel);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s ease;
+}
+
+.is-active .card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card:hover {
+    border-color: var(--depth-dim);
+}
+
+.title {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--signal);
+}
+
+.marquee {
+    margin-top: 0.8rem;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.track {
+    display: flex;
+    width: max-content;
+    animation: scroll 22s linear infinite;
+}
+
+.marquee:hover .track {
     animation-play-state: paused;
 }
 
-@keyframes skill-marquee {
+.set {
+    display: flex;
+    gap: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.pill {
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    color: var(--paper);
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--panel-2);
+}
+
+@keyframes scroll {
     from {
         transform: translateX(0);
     }
-
     to {
-        transform: translateX(calc(-50% - 0.5rem));
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 780px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+    .track {
+        animation: none;
     }
 }
 </style>
