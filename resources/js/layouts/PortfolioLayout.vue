@@ -28,7 +28,7 @@ const sections: StageSection[] = [
 const stage = provideScrollStage(sections);
 
 const trackStyle = computed(() => ({
-    transform: `translateY(calc(var(--vh, 1vh) * -100 * ${stage.state.activeSection}))`,
+    transform: `translate3d(0, calc(var(--vh, 1vh) * -100 * ${stage.state.activeSection}), 0)`,
 }));
 </script>
 
@@ -98,16 +98,13 @@ body {
     flex-shrink: 0;
     overflow: hidden;
     z-index: 1;
-    opacity: 0.32;
-    filter: saturate(0.55) brightness(0.85);
-    transition:
-        opacity 0.7s ease,
-        filter 0.7s ease;
+    opacity: 1;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .stage-section.is-active {
     opacity: 1;
-    filter: saturate(1) brightness(1);
 }
 
 *:focus-visible {

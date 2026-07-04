@@ -42,6 +42,9 @@ const { isActiveSection } = useSectionSlide('resume');
                             class="preview-image"
                             src="/images/Resume.png"
                             alt="Resume preview"
+                            loading="eager"
+                            decoding="async"
+                            fetchpriority="high"
                         />
                     </div>
                 </div>
@@ -89,20 +92,12 @@ const { isActiveSection } = useSectionSlide('resume');
 
 .copy,
 .preview-wrap {
-    opacity: 0;
-    transform: translateY(14px);
+    opacity: 1;
+    transform: none;
 }
 
 .preview-wrap {
     min-width: 0;
-}
-
-.is-active .copy {
-    animation: rise 0.6s ease-out 0.08s forwards;
-}
-
-.is-active .preview-wrap {
-    animation: rise 0.6s ease-out 0.18s forwards;
 }
 
 .title {
@@ -156,20 +151,15 @@ const { isActiveSection } = useSectionSlide('resume');
     border-radius: 20px;
     overflow: hidden;
     background: linear-gradient(180deg, var(--panel), var(--panel-2));
-    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 18px 42px -30px rgba(0, 0, 0, 0.55);
+    contain: paint;
+    transform: translateZ(0);
 }
 
 .preview-image {
     display: block;
     width: 100%;
     height: auto;
-}
-
-@keyframes rise {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 @media (max-width: 900px) {

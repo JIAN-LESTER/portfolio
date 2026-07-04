@@ -22,6 +22,7 @@ interface StageState {
 }
 
 const STAGE_KEY = Symbol('portfolio-scroll-stage');
+const STAGE_TRANSITION_MS = 900;
 
 /**
  * Owns the scroll-jacking state for the whole page: which section is active
@@ -43,7 +44,7 @@ export function provideScrollStage(sections: StageSection[]) {
 
     let unlockTimer: number | undefined;
 
-    function lock(duration = reducedMotion ? 50 : 780) {
+    function lock(duration = reducedMotion ? 50 : STAGE_TRANSITION_MS) {
         state.isAnimating = true;
         window.clearTimeout(unlockTimer);
         unlockTimer = window.setTimeout(() => {
