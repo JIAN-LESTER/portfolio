@@ -27,16 +27,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-
       - name: Install Node Dependencies
         run: npm i
 
-      - name: Install PHP Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
-
-      - name: Build Assets
+      - name: Build
         run: npm run build
