@@ -46,7 +46,7 @@ function submitBuildRequest() {
         class="stage-section contact"
         :class="{ 'is-active': isActiveSection }"
     >
-        <div class="section-inner">
+        <div class="section-inner" data-stage-scroll>
             <div
                 class="contact-panel rounded-3xl border border-cyan-300/20 bg-slate-950/80 p-6 shadow-2xl shadow-cyan-950/20 sm:p-8"
             >
@@ -239,6 +239,9 @@ function submitBuildRequest() {
 
 .section-inner {
     width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 0 15px;
     padding-inline: clamp(15px, 8vw, 140px);
     max-width: 1600px;
@@ -258,8 +261,65 @@ function submitBuildRequest() {
 }
 
 @media (max-width: 640px) {
+    .contact {
+        align-items: stretch;
+    }
+
     .section-inner {
-        padding-inline: 1.5rem;
+        padding-block: 5.25rem 2rem;
+        padding-inline: clamp(18px, 6vw, 30px);
+    }
+
+    .contact-panel {
+        border-radius: 20px;
+        padding: 1.25rem;
+    }
+
+    .contact-inner {
+        gap: 1.25rem;
+    }
+
+    .contact-copy h2 {
+        font-size: clamp(1.7rem, 9vw, 2.1rem);
+        line-height: 1.12;
+    }
+
+    .contact-copy p {
+        overflow-wrap: anywhere;
+    }
+
+    .contact-link {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        justify-content: center;
+    }
+
+    .contact-form {
+        border-radius: 18px;
+        padding: 1rem;
+    }
+
+    .request-field {
+        border-radius: 14px;
+    }
+
+    .send-button {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 420px) {
+    .contact-panel {
+        padding: 1rem;
+    }
+
+    .contact-form > div:last-child {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .send-button {
+        width: 100%;
     }
 }
 

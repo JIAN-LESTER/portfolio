@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { useSectionSlide } from '@/composables/useScrollStage';
-import type { EducationItem, ExperienceItem } from '@/types/portfolio';
+import type {
+    EducationItem,
+    ExperienceItem,
+    ProjectItem,
+} from '@/types/portfolio';
 import PaginationDots from './PaginationDots.vue';
 
 defineProps<{
     education: EducationItem;
     experience: ExperienceItem;
+    capstone: ProjectItem;
 }>();
 
 const { active, count, isActiveSection, next, prev, goTo } =
@@ -34,7 +39,7 @@ const { active, count, isActiveSection, next, prev, goTo } =
                 :style="{ transform: `translateX(-${active * 100}%)` }"
             >
                 <!-- Slide 1: Education -->
-                <div class="slide">
+                <div class="slide" :class="{ 'is-current': active === 0 }">
                     <span class="kicker">01 &middot; EDUCATION</span>
                     <h3 class="title">{{ education.school }}</h3>
                     <p class="sub">
@@ -51,9 +56,30 @@ const { active, count, isActiveSection, next, prev, goTo } =
                     </p>
                 </div>
 
-                <!-- Slide 2: Experience -->
-                <div class="slide">
-                    <span class="kicker">02 &middot; EXPERIENCE</span>
+                <!-- Slide 2: Capstone -->
+                <div class="slide" :class="{ 'is-current': active === 1 }">
+                    <span class="kicker">02 &middot; CAPSTONE PROJECT</span>
+                    <h3 class="title">{{ capstone.title }}</h3>
+                    <p class="sub">{{ capstone.tag }}</p>
+                    <p class="desc">
+                        Built as a capstone project for CMU-OASP to reduce
+                        repetitive manual replies and give staff a clearer view
+                        of what students ask most often. The system generates
+                        grounded responses from office information, records
+                        inquiry activity, and turns those interactions into
+                        reports that help the office monitor common concerns and
+                        response trends.
+                    </p>
+                    <ul class="stack">
+                        <li v-for="item in capstone.stack" :key="item">
+                            {{ item }}
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Slide 3: Experience -->
+                <div class="slide" :class="{ 'is-current': active === 2 }">
+                    <span class="kicker">03 &middot; EXPERIENCE</span>
                     <h3 class="title">{{ experience.company }}</h3>
                     <p class="sub">{{ experience.role }}</p>
                     <p class="range">
@@ -193,6 +219,25 @@ const { active, count, isActiveSection, next, prev, goTo } =
     color: var(--depth);
 }
 
+.stack {
+    margin-top: 1.2rem;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 58ch;
+}
+
+.stack li {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+}
+
 @keyframes rise {
     to {
         opacity: 1;
@@ -208,6 +253,28 @@ const { active, count, isActiveSection, next, prev, goTo } =
         animation: none !important;
         opacity: 1;
         transform: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .section-inner {
+        padding-inline: 0;
+    }
+
+    .head-row {
+        padding-inline: clamp(18px, 6vw, 30px);
+    }
+
+    .slide {
+        box-sizing: border-box;
+        padding-inline: clamp(18px, 6vw, 30px);
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .slide.is-current {
+        visibility: visible;
+        pointer-events: auto;
     }
 }
 </style>

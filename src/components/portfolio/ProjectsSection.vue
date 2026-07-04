@@ -333,6 +333,19 @@ const { active, count, isActiveSection, next, prev, goTo } =
 }
 
 @media (max-width: 640px) {
+    .section-inner {
+        padding-inline: 0;
+    }
+
+    .head-row {
+        padding-inline: clamp(15px, 6vw, 28px);
+    }
+
+    .slide {
+        box-sizing: border-box;
+        padding-inline: clamp(18px, 6vw, 30px);
+    }
+
     .footer {
         flex-direction: column;
         align-items: flex-start;
