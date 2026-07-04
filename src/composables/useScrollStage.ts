@@ -137,22 +137,55 @@ export function provideScrollStage(sections: StageSection[]) {
         lock();
     }
 
-    function onWheel(e: WheelEvent) {
-        e.preventDefault();
+    function getScrollableTarget(target: EventTarget | null) {
+        if (!(target instanceof Element)) {
+            return null;
+        }
 
+        return target.closest<HTMLElement>('[data-stage-scroll]');
+    }
+
+    function canScrollTarget(target: EventTarget | null, dir: 1 | -1) {
+        const scrollable = getScrollableTarget(target);
+
+        if (!scrollable) {
+            return false;
+        }
+
+        const maxScroll = scrollable.scrollHeight - scrollable.clientHeight;
+
+        if (maxScroll <= 0) {
+            return false;
+        }
+
+        return dir > 0
+            ? scrollable.scrollTop < maxScroll - 1
+            : scrollable.scrollTop > 1;
+    }
+
+    function onWheel(e: WheelEvent) {
         if (Math.abs(e.deltaY) < 4) {
             return;
         }
 
-        navigate(e.deltaY > 0 ? 1 : -1);
+        const dir = e.deltaY > 0 ? 1 : -1;
+
+        if (canScrollTarget(e.target, dir)) {
+            return;
+        }
+
+        e.preventDefault();
+        navigate(dir);
     }
 
     let touchStartX = 0;
     let touchStartY = 0;
+    let touchScrollTarget: EventTarget | null = null;
 
     function onTouchStart(e: TouchEvent) {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
+        touchScrollTarget = e.target;
     }
 
     function onTouchEnd(e: TouchEvent) {
@@ -165,7 +198,11 @@ export function provideScrollStage(sections: StageSection[]) {
                 navigateSlide(dx < 0 ? 1 : -1);
             }
         } else if (Math.abs(dy) > threshold) {
-            navigate(dy < 0 ? 1 : -1);
+            const dir = dy < 0 ? 1 : -1;
+
+            if (!canScrollTarget(touchScrollTarget, dir)) {
+                navigate(dir);
+            }
         }
     }
 

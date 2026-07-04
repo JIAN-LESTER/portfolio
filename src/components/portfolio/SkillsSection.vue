@@ -121,7 +121,7 @@ function getIcon(item: SkillItem): Component {
         class="stage-section skills"
         :class="{ 'is-active': isActiveSection }"
     >
-        <div class="section-inner">
+        <div class="section-inner" data-stage-scroll>
             <p class="eyebrow">SKILLS</p>
 
             <div class="grid">
@@ -173,6 +173,9 @@ function getIcon(item: SkillItem): Component {
 
 .section-inner {
     width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 0 15px;
     padding-inline: clamp(15px, 8vw, 140px);
     max-width: 1600px;
@@ -306,8 +309,31 @@ function getIcon(item: SkillItem): Component {
 }
 
 @media (max-width: 620px) {
+    .skills {
+        align-items: stretch;
+    }
+
+    .section-inner {
+        padding-block: 5.5rem 2rem;
+        padding-inline: clamp(18px, 6vw, 30px);
+    }
+
+    .eyebrow {
+        margin-bottom: 1.35rem;
+    }
+
     .grid {
         grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding-bottom: 1rem;
+    }
+
+    .card {
+        padding: 1.1rem;
+    }
+
+    .icon-grid {
+        gap: 0.75rem;
     }
 }
 
