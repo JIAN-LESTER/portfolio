@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { Head, Link, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
-import { dashboard } from '@/routes';
-
-const page = usePage();
-const dashboardUrl = computed(() =>
-    page.props.currentTeam ? dashboard(page.props.currentTeam.slug).url : '/',
-);
+import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -21,13 +14,6 @@ const dashboardUrl = computed(() =>
             <p class="text-muted-foreground">
                 The site is now focused on public content only.
             </p>
-            <Link
-                v-if="dashboardUrl !== '/'"
-                :href="dashboardUrl"
-                class="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground"
-            >
-                Dashboard
-            </Link>
         </div>
     </div>
 </template>
