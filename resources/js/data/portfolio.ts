@@ -49,7 +49,14 @@ export const portfolioData: PortfolioData = {
                 'An inquiry assistant for CMU\u2019s Office of Admissions, Scholarships & Placement.',
             description:
                 'Cross-platform Flutter app that answers student inquiries using retrieval-augmented generation. Pinecone handles vector search over admissions data, Gemini generates the response, and Firebase Cloud Functions (TypeScript) tie retrieval, embeddings, and real-time data together so answers stay fast and grounded instead of generic.',
-            stack: ['Flutter', 'Firebase', 'Pinecone', 'Gemini', 'RAG', 'TypeScript'],
+            stack: [
+                'Flutter',
+                'Firebase',
+                'Pinecone',
+                'Gemini',
+                'RAG',
+                'TypeScript',
+            ],
         },
         {
             title: 'Gym Management System',
@@ -63,7 +70,8 @@ export const portfolioData: PortfolioData = {
         {
             title: 'BukCast',
             tag: 'Web · Real-time data',
-            summary: 'Real-time weather monitoring for the province of Bukidnon.',
+            summary:
+                'Real-time weather monitoring for the province of Bukidnon.',
             description:
                 'A system that collects, processes, and displays live weather data on a map and dashboard, giving a province-wide view of conditions as they change rather than a single-station snapshot.',
             stack: ['Laravel', 'PHP', 'Blade', 'JavaScript', 'MySQL'],
@@ -75,7 +83,14 @@ export const portfolioData: PortfolioData = {
                 'A personal job application tracker with a companion browser extension.',
             description:
                 'A focused tracking system for managing job applications, company details, statuses, notes, and follow-ups. Its browser extension can capture job details directly from job websites and add them to JobTrackr, reducing manual entry and keeping the search pipeline organized.',
-            stack: ['Laravel', 'PHP', 'React', 'TypeScript', 'PostgreSQL', 'Browser Extension'],
+            stack: [
+                'Laravel',
+                'PHP',
+                'React',
+                'TypeScript',
+                'PostgreSQL',
+                'Browser Extension',
+            ],
         },
     ],
 

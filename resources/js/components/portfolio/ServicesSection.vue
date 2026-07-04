@@ -5,23 +5,42 @@ import PaginationDots from './PaginationDots.vue';
 
 defineProps<{ services: ServiceItem[] }>();
 
-const { active, count, isActiveSection, next, prev, goTo } = useSectionSlide('services');
+const { active, count, isActiveSection, next, prev, goTo } =
+    useSectionSlide('services');
 </script>
 
 <template>
-    <section class="stage-section services" :class="{ 'is-active': isActiveSection }">
+    <section
+        class="stage-section services"
+        :class="{ 'is-active': isActiveSection }"
+    >
         <div class="section-inner">
             <div class="head-row">
                 <p class="eyebrow">SERVICES</p>
                 <div class="head-right">
-                    <PaginationDots :count="count" :active="active" @prev="prev" @next="next" @go="goTo" />
+                    <PaginationDots
+                        :count="count"
+                        :active="active"
+                        @prev="prev"
+                        @next="next"
+                        @go="goTo"
+                    />
                 </div>
             </div>
 
-            <div class="track" :style="{ transform: `translateX(-${active * 100}%)` }">
-                <article v-for="(service, i) in services" :key="service.code" class="slide">
+            <div
+                class="track"
+                :style="{ transform: `translateX(-${active * 100}%)` }"
+            >
+                <article
+                    v-for="(service, i) in services"
+                    :key="service.code"
+                    class="slide"
+                >
                     <div class="card">
-                        <span class="watermark" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
+                        <span class="watermark" aria-hidden="true">{{
+                            String(i + 1).padStart(2, '0')
+                        }}</span>
 
                         <div class="card-head">
                             <span class="kicker">{{ service.code }}</span>
@@ -103,7 +122,9 @@ const { active, count, isActiveSection, next, prev, goTo } = useSectionSlide('se
     background: linear-gradient(160deg, var(--panel), var(--panel-2));
     opacity: 0;
     transform: translateY(10px);
-    transition: border-color 0.25s ease, transform 0.25s ease;
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease;
 }
 
 .is-active .card {

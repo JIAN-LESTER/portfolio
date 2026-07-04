@@ -17,10 +17,9 @@ const { isActiveSection } = useSectionSlide('about');
 
             <div class="grid">
                 <h2 class="headline">
-                    I turn ideas into applications with clean UI,
-                    reliable backend logic, structured databases, real-time dashboards,
+                    I turn ideas into applications with clean UI, reliable
+                    backend logic, structured databases, real-time dashboards,
                     and AI-powered features built for real-world use.
-                    
                 </h2>
 
                 <div class="copy">

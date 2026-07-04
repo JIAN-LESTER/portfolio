@@ -75,7 +75,8 @@ const { active, count, isActiveSection, next, prev, goTo } =
                                         target="_blank"
                                         rel="noreferrer"
                                         class="link"
-                                        >Source <span class="arrow">&rarr;</span></a
+                                        >Source
+                                        <span class="arrow">&rarr;</span></a
                                     >
                                     <a
                                         v-if="project.live"
@@ -83,7 +84,8 @@ const { active, count, isActiveSection, next, prev, goTo } =
                                         target="_blank"
                                         rel="noreferrer"
                                         class="link link-live"
-                                        >Live <span class="arrow">&rarr;</span></a
+                                        >Live
+                                        <span class="arrow">&rarr;</span></a
                                     >
                                 </div>
                             </div>
@@ -153,7 +155,9 @@ const { active, count, isActiveSection, next, prev, goTo } =
     background: linear-gradient(160deg, var(--panel), var(--panel-2));
     opacity: 0;
     transform: translateY(10px);
-    transition: border-color 0.25s ease, transform 0.25s ease;
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease;
 }
 
 .is-active .card {
@@ -253,7 +257,9 @@ const { active, count, isActiveSection, next, prev, goTo } =
     border: 1px solid var(--line);
     border-radius: 999px;
     color: var(--muted);
-    transition: border-color 0.2s ease, color 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .card:hover .stack li {
@@ -277,7 +283,10 @@ const { active, count, isActiveSection, next, prev, goTo } =
     padding: 0.45rem 0.9rem;
     border: 1px solid var(--line);
     border-radius: 999px;
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
 }
 
 .link-live {
