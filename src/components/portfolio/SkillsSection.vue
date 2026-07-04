@@ -62,6 +62,7 @@ const brandMap: Record<string, { path: string; hex: string }> = {
     tailwindcss: si.siTailwindcss,
     typescript: si.siTypescript,
     vercel: si.siVercel,
+    vue: si.siVuedotjs,
 };
 
 function brandKey(value: string) {

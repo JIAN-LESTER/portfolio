@@ -152,48 +152,52 @@ export const portfolioData: PortfolioData = {
     // (which is, fittingly, React's actual logo shape).
     skills: [
         {
-            title: 'Backend',
+            title: 'Backend Development',
             items: [
                 { name: 'PHP', logo: 'braces' },
                 { name: 'Laravel', logo: 'layers' },
                 { name: 'REST APIs', logo: 'network' },
                 { name: 'Firebase Functions', logo: 'firebase' },
-                { name: 'Prisma', logo: 'database' },
-                { name: 'Python', logo: 'terminal' },
+                { name: 'Python', logo: 'code' },
                 { name: 'Java', logo: 'coffee' },
             ],
         },
         {
-            title: 'Frontend',
+            title: 'Frontend Development',
             items: [
                 { name: 'JavaScript', logo: 'code' },
                 { name: 'TypeScript', logo: 'file-type' },
                 { name: 'React', logo: 'atom' },
-                { name: 'Next.js', logo: 'server' },
-                { name: 'Blade', logo: 'layout-template' },
+                { name: 'Next.js', logo: 'triangle' },
+                { name: 'HTML', logo: 'file-type' },
                 { name: 'Tailwind CSS', logo: 'wind' },
+                { name: 'Vue', logo: 'blocks' },
+                { name: 'Responsive UI', logo: 'layout-template' },
             ],
         },
         {
-            title: 'Mobile',
+            title: 'Mobile Development',
             items: [
-                { name: 'Dart', logo: 'target' },
+                { name: 'Dart', logo: 'dart' },
                 { name: 'Flutter', logo: 'smartphone' },
+                { name: 'Native Android Basics', logo: 'smartphone' },
+                { name: 'Java', logo: 'coffee' },
+                { name: 'XML', logo: 'file-type' },
             ],
         },
         {
             title: 'Databases & Cloud',
             items: [
-                { name: 'MySQL', logo: 'database' },
-                { name: 'PostgreSQL', logo: 'database' },
-                { name: 'Firestore', logo: 'cloud' },
-                { name: 'Firebase Storage', logo: 'folder-open' },
                 { name: 'SQL', logo: 'table-2' },
                 { name: 'NoSQL', logo: 'blocks' },
+                { name: 'MySQL', logo: 'database' },
+                { name: 'PostgreSQL', logo: 'database' },
+                { name: 'Firebase Firestore', logo: 'cloud' },
+                { name: 'Prisma', logo: 'database' },
             ],
         },
         {
-            title: 'AI & Retrieval',
+            title: 'AI & Data Retrieval',
             items: [
                 { name: 'RAG', logo: 'brain' },
                 { name: 'Pinecone', logo: 'search' },
@@ -203,7 +207,7 @@ export const portfolioData: PortfolioData = {
             ],
         },
         {
-            title: 'Design & UX',
+            title: 'Web Design & UI/UX',
             items: [
                 { name: 'Figma', logo: 'pen-tool' },
                 { name: 'Wireframing', logo: 'drafting-compass' },
@@ -216,10 +220,12 @@ export const portfolioData: PortfolioData = {
             items: [
                 { name: 'Git', logo: 'git-branch' },
                 { name: 'GitHub', logo: 'github' },
+                { name: 'GitHub Actions', logo: 'github' },
+                { name: 'CI/CD', logo: 'git-branch' },
                 { name: 'Docker', logo: 'container' },
                 { name: 'Vercel', logo: 'triangle' },
-                { name: 'Postman', logo: 'send' },
                 { name: 'Firebase', logo: 'flame' },
+                { name: 'Render', logo: 'cloud' },
             ],
         },
     ],
