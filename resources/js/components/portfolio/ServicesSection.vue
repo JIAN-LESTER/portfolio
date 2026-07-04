@@ -12,7 +12,7 @@ const { active, count, isActiveSection, next, prev, goTo } = useSectionSlide('se
     <section class="stage-section services" :class="{ 'is-active': isActiveSection }">
         <div class="section-inner">
             <div class="head-row">
-                <p class="eyebrow">RECORD 05 / 07 &middot; SERVICES</p>
+                <p class="eyebrow">SERVICES</p>
                 <div class="head-right">
                     <span class="tally">{{ String(active + 1).padStart(2, '0') }} / {{ String(count).padStart(2, '0') }}</span>
                     <PaginationDots :count="count" :active="active" @prev="prev" @next="next" @go="goTo" />

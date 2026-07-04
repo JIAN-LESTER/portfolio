@@ -19,7 +19,7 @@ const { active, count, isActiveSection, next, prev, goTo } =
     >
         <div class="section-inner">
             <div class="head-row">
-                <p class="eyebrow">JOURNEY</p>
+                <p class="eyebrow">EDUCATION &middot; EXPERIENCE</p>
                 <PaginationDots
                     :count="count"
                     :active="active"

@@ -17,6 +17,7 @@ import {
     Github,
     GitBranch,
     LayoutTemplate,
+    Layers,
     MessageSquareText,
     Network,
     Palette,
@@ -41,28 +42,34 @@ defineProps<{ skills: SkillGroup[] }>();
 const { isActiveSection } = useSectionSlide('skills');
 
 const brandMap: Record<string, { path: string; hex: string }> = {
-    react: si.siReact,
-    typescript: si.siTypescript,
-    javascript: si.siJavascript,
-    php: si.siPhp,
-    laravel: si.siLaravel,
-    python: si.siPython,
-    nextjs: si.siNextdotjs,
-    firebase: si.siFirebase,
-    flame: si.siFirebase,
-    github: si.siGithub,
     dart: si.siDart,
-    wind: si.siTailwindcss,
+    docker: si.siDocker,
     figma: si.siFigma,
-    'pen-tool': si.siFigma,
-    database: si.siMysql, // swap per stack if needed
-    container: si.siDocker,
-    smartphone: si.siFlutter, // swap per stack if needed
-    vue: si.siVuedotjs,
+    firebase: si.siFirebase,
+    firebasefunctions: si.siFirebase,
+    firebasestorage: si.siFirebase,
+    flutter: si.siFlutter,
+    git: si.siGit,
+    github: si.siGithub,
+    javascript: si.siJavascript,
+    laravel: si.siLaravel,
+    mysql: si.siMysql,
+    nextjs: si.siNextdotjs,
+    php: si.siPhp,
+    postgresql: si.siPostgresql,
+    prisma: si.siPrisma,
+    react: si.siReact,
+    tailwindcss: si.siTailwindcss,
+    typescript: si.siTypescript,
+    vercel: si.siVercel,
 };
 
+function brandKey(value: string) {
+    return value.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
 function getBrand(item: SkillItem) {
-    return item.logo ? brandMap[item.logo] : undefined;
+    return brandMap[brandKey(item.name)];
 }
 
 const iconMap: Record<string, Component> = {
@@ -76,12 +83,14 @@ const iconMap: Record<string, Component> = {
     database: Database,
     'drafting-compass': DraftingCompass,
     firebase: Flame,
+    'file-type': SquareTerminal,
     flame: Flame,
     'folder-open': FolderOpen,
     'git-branch': GitBranch,
     github: Github,
     javascript: Braces,
     laravel: Braces,
+    layers: Layers,
     'layout-template': LayoutTemplate,
     'message-square-text': MessageSquareText,
     nextjs: Triangle,

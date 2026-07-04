@@ -69,7 +69,7 @@ export const portfolioData: PortfolioData = {
         },
         {
             title: 'JobTrackr',
-            tag: 'Web Â· Productivity',
+            tag: 'Web · Productivity',
             summary:
                 'A personal job application tracker with a companion browser extension.',
             description:

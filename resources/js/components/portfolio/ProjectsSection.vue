@@ -16,7 +16,7 @@ const { active, count, isActiveSection, next, prev, goTo } =
     >
         <div class="section-inner">
             <div class="head-row">
-                <p class="eyebrow">RECORD 04 / 07 &middot; PROJECTS</p>
+                <p class="eyebrow">PROJECTS</p>
                 <div class="head-right">
                     <span class="tally">{{
                         String(active + 1).padStart(2, '0')

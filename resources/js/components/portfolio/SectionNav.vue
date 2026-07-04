@@ -73,7 +73,9 @@ const emit = defineEmits<{ go: [index: number] }>();
         opacity 0.2s ease,
         transform 0.2s ease;
     pointer-events: none;
-    white-space: nowrap;
+    white-space: pre-line;
+    text-align: right;
+    line-height: 1.35;
 }
 
 .tick:hover .label,
