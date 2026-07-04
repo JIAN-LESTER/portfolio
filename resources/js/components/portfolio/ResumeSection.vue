@@ -144,22 +144,30 @@ const { isActiveSection } = useSectionSlide('resume');
 }
 
 .preview-frame {
+    position: relative;
     width: min(100%, 620px);
     max-width: 100%;
     margin-left: auto;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    overflow: hidden;
-    background: linear-gradient(180deg, var(--panel), var(--panel-2));
-    box-shadow: 0 18px 42px -30px rgba(0, 0, 0, 0.55);
-    contain: paint;
     transform: translateZ(0);
 }
 
+.preview-frame::before {
+    content: '';
+    position: absolute;
+    inset: 12px -12px -12px 12px;
+    border: 1px solid var(--depth-dim);
+    border-radius: 16px;
+}
+
 .preview-image {
+    position: relative;
     display: block;
     width: 100%;
     height: auto;
+    box-sizing: border-box;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--panel);
 }
 
 @media (max-width: 900px) {
