@@ -10,6 +10,9 @@ defineProps<{
 const { isActiveSection } = useSectionSlide('contact');
 
 const form = useForm({
+    name: '',
+    email: '',
+    service: '',
     message: '',
 });
 
@@ -82,12 +85,86 @@ function submitBuildRequest() {
                         class="contact-form rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-xl shadow-slate-950/20 sm:p-6"
                         @submit.prevent="submitBuildRequest"
                     >
-                        <div>
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <div>
+                                <label
+                                    for="visitor-name"
+                                    class="text-sm font-medium text-white"
+                                >
+                                    Your name
+                                </label>
+                                <input
+                                    id="visitor-name"
+                                    v-model="form.name"
+                                    type="text"
+                                    required
+                                    maxlength="120"
+                                    class="request-field mt-3 w-full rounded-2xl border border-white/15 bg-slate-900/90 px-4 py-3 text-sm leading-6 text-white placeholder:text-slate-500 focus:border-cyan-200 focus:ring-2 focus:ring-cyan-200/20 focus:outline-none"
+                                    placeholder="Juan Dela Cruz"
+                                />
+                                <p
+                                    v-if="form.errors.name"
+                                    class="status-message mt-3 text-sm text-red-200"
+                                >
+                                    {{ form.errors.name }}
+                                </p>
+                            </div>
+
+                            <div>
+                                <label
+                                    for="visitor-email"
+                                    class="text-sm font-medium text-white"
+                                >
+                                    Email address
+                                </label>
+                                <input
+                                    id="visitor-email"
+                                    v-model="form.email"
+                                    type="email"
+                                    required
+                                    maxlength="255"
+                                    class="request-field mt-3 w-full rounded-2xl border border-white/15 bg-slate-900/90 px-4 py-3 text-sm leading-6 text-white placeholder:text-slate-500 focus:border-cyan-200 focus:ring-2 focus:ring-cyan-200/20 focus:outline-none"
+                                    placeholder="name@example.com"
+                                />
+                                <p
+                                    v-if="form.errors.email"
+                                    class="status-message mt-3 text-sm text-red-200"
+                                >
+                                    {{ form.errors.email }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <label
+                                for="service-request"
+                                class="text-sm font-medium text-white"
+                            >
+                                System or service needed
+                            </label>
+                            <input
+                                id="service-request"
+                                v-model="form.service"
+                                type="text"
+                                required
+                                maxlength="150"
+                                class="request-field mt-3 w-full rounded-2xl border border-white/15 bg-slate-900/90 px-4 py-3 text-sm leading-6 text-white placeholder:text-slate-500 focus:border-cyan-200 focus:ring-2 focus:ring-cyan-200/20 focus:outline-none"
+                                placeholder="Website, mobile app, admin system, AI feature, or support service"
+                            />
+                            <p
+                                v-if="form.errors.service"
+                                class="status-message mt-3 text-sm text-red-200"
+                            >
+                                {{ form.errors.service }}
+                            </p>
+                        </div>
+
+                        <div class="mt-4">
                             <label
                                 for="build-request"
                                 class="text-sm font-medium text-white"
                             >
-                                What do you want me to build?
+                                Project details
                             </label>
                             <textarea
                                 id="build-request"
