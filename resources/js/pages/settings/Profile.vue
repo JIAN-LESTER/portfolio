@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { Form, Head, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
-import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import DeleteUser from '@/components/DeleteUser.vue';
 import Heading from '@/components/Heading.vue';
 import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { edit } from '@/routes/profile';
 
 type Props = {
     status?: string;
@@ -21,7 +19,7 @@ defineOptions({
         breadcrumbs: [
             {
                 title: 'Profile settings',
-                href: edit(),
+                href: '/settings/profile',
             },
         ],
     },
@@ -29,6 +27,7 @@ defineOptions({
 
 const page = usePage();
 const user = computed(() => page.props.auth.user);
+const updateProfileForm = { action: '/settings/profile', method: 'patch' };
 </script>
 
 <template>
@@ -44,7 +43,7 @@ const user = computed(() => page.props.auth.user);
         />
 
         <Form
-            v-bind="ProfileController.update.form()"
+            v-bind="updateProfileForm"
             class="space-y-6"
             v-slot="{ errors, processing, recentlySuccessful }"
         >

@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
-import { update } from '@/routes/password';
 
 defineOptions({
     layout: {
@@ -22,13 +21,14 @@ const props = defineProps<{
 }>();
 
 const inputEmail = ref(props.email);
+const resetPasswordForm = { action: '/reset-password', method: 'post' };
 </script>
 
 <template>
     <Head title="Reset password" />
 
     <Form
-        v-bind="update.form()"
+        v-bind="resetPasswordForm"
         :transform="(data) => ({ ...data, token, email })"
         :reset-on-success="['password', 'password_confirmation']"
         v-slot="{ errors, processing }"

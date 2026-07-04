@@ -21,7 +21,6 @@ import {
 import { Spinner } from '@/components/ui/spinner';
 import { useAppearance } from '@/composables/useAppearance';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
-import { confirm } from '@/routes/two-factor';
 import type { TwoFactorConfigContent } from '@/types';
 
 type Props = {
@@ -40,6 +39,10 @@ const { qrCodeSvg, manualSetupKey, clearSetupData, fetchSetupData, errors } =
 
 const showVerificationStep = ref(false);
 const code = ref<string>('');
+const confirmTwoFactorForm = {
+    action: '/user/confirmed-two-factor-authentication',
+    method: 'post',
+};
 
 const pinInputContainerRef = useTemplateRef('pinInputContainerRef');
 
@@ -238,7 +241,7 @@ watch(
 
                 <template v-else>
                     <Form
-                        v-bind="confirm.form()"
+                        v-bind="confirmTwoFactorForm"
                         error-bag="confirmTwoFactorAuthentication"
                         reset-on-error
                         @finish="code = ''"
