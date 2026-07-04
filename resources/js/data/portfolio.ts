@@ -67,6 +67,15 @@ export const portfolioData: PortfolioData = {
                 'A system that collects, processes, and displays live weather data on a map and dashboard, giving a province-wide view of conditions as they change rather than a single-station snapshot.',
             stack: ['Laravel', 'PHP', 'Blade', 'JavaScript', 'MySQL'],
         },
+        {
+            title: 'JobTrackr',
+            tag: 'Web Â· Productivity',
+            summary:
+                'A personal job application tracker with a companion browser extension.',
+            description:
+                'A focused tracking system for managing job applications, company details, statuses, notes, and follow-ups. Its browser extension can capture job details directly from job websites and add them to JobTrackr, reducing manual entry and keeping the search pipeline organized.',
+            stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Browser Extension'],
+        },
     ],
 
     services: [
