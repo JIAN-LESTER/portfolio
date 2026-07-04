@@ -15,11 +15,25 @@ const { active, count, isActiveSection, next, prev, goTo } =
         :class="{ 'is-active': isActiveSection }"
     >
         <div class="section-inner">
-            <p class="eyebrow">PROJECTS</p>
+            <div class="head-row">
+                <p class="eyebrow">RECORD 04 / 07 &middot; PROJECTS</p>
+                <div class="head-right">
+                    <span class="tally">{{
+                        String(active + 1).padStart(2, '0')
+                    }} / {{ String(count).padStart(2, '0') }}</span>
+                    <PaginationDots
+                        :count="count"
+                        :active="active"
+                        @prev="prev"
+                        @next="next"
+                        @go="goTo"
+                    />
+                </div>
+            </div>
 
             <div
                 class="track"
-                :style="{ transform: `translateX(calc(-${active * 100}% + ${active * 1.2}rem))` }"
+                :style="{ transform: `translateX(-${active * 100}%)` }"
             >
                 <article
                     v-for="(project, i) in projects"
@@ -27,22 +41,22 @@ const { active, count, isActiveSection, next, prev, goTo } =
                     class="slide"
                 >
                     <div class="card">
-                        <div class="rail">
-                            <span class="index-num">{{
-                                String(i + 1).padStart(2, '0')
-                            }}</span>
+                        <span class="watermark" aria-hidden="true">{{
+                            String(i + 1).padStart(2, '0')
+                        }}</span>
+
+                        <div class="card-head">
                             <span class="kicker">{{
                                 project.tag.toUpperCase()
                             }}</span>
+                            <h3 class="title">{{ project.title }}</h3>
                         </div>
 
-                        <div class="body">
-                            <div class="head">
-                                <h3 class="title">{{ project.title }}</h3>
-                                <p class="summary">{{ project.summary }}</p>
+                        <div class="content">
+                            <div class="paragraphs">
+                                <p class="para lead">{{ project.summary }}</p>
+                                <p class="para">{{ project.description }}</p>
                             </div>
-
-                            <p class="desc">{{ project.description }}</p>
 
                             <div class="footer">
                                 <ul class="stack">
@@ -80,15 +94,6 @@ const { active, count, isActiveSection, next, prev, goTo } =
                     </div>
                 </article>
             </div>
-
-            <PaginationDots
-                class="dots"
-                :count="count"
-                :active="active"
-                @prev="prev"
-                @next="next"
-                @go="goTo"
-            />
         </div>
     </section>
 </template>
@@ -101,10 +106,20 @@ const { active, count, isActiveSection, next, prev, goTo } =
 
 .section-inner {
     width: 100%;
-    padding-inline: clamp(15px, 8vw, 140px);
+    padding: 0 15px;
+    padding-inline: clamp(15px, 7vw, 120px);
     max-width: 1600px;
     margin-inline: auto;
     overflow: hidden;
+}
+
+.head-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .eyebrow {
@@ -112,99 +127,114 @@ const { active, count, isActiveSection, next, prev, goTo } =
     font-size: 0.72rem;
     letter-spacing: 0.18em;
     color: var(--depth);
-    margin-bottom: 2rem;
+}
+
+.head-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tally {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
 }
 
 .track {
     display: flex;
-    width: calc(100% + 8rem);
-    gap: 1.2rem;
     transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .slide {
-    flex: 0 0 calc(100% - 8rem);
-    min-width: 0;
-    max-width: calc(100% - 8rem);
-    opacity: 0;
-    transform: translateY(10px) scale(0.99);
-}
-
-.is-active .slide {
-    animation: rise 0.6s ease-out 0.1s forwards;
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
 }
 
 .card {
-    display: grid;
-    grid-template-columns: clamp(80px, 12vw, 160px) 1fr;
-    gap: clamp(1.5rem, 4vw, 4rem);
-    padding: clamp(1.8rem, 3.5vw, 2.8rem);
+    position: relative;
+    max-width: 1100px;
+    overflow: hidden;
+    padding: clamp(1.75rem, 4vw, 3rem);
     border: 1px solid var(--line);
-    border-radius: 18px;
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0))
-            border-box,
-        linear-gradient(160deg, color-mix(in srgb, var(--panel) 92%, #05070d), var(--panel-2));
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+    border-radius: 16px;
+    background: linear-gradient(160deg, var(--panel), var(--panel-2));
+    opacity: 0;
+    transform: translateY(10px);
     transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.is-active .card {
+    animation: rise 0.6s ease-out 0.1s forwards;
 }
 
 .card:hover {
     border-color: var(--depth-dim);
-    transform: translateY(-2px);
 }
 
-.rail {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    padding-top: 0.3rem;
-    border-left: 1px solid var(--signal-dim, rgba(255, 255, 255, 0.12));
-    padding-left: 1.1rem;
-}
-
-.index-num {
-    font-family: var(--font-mono);
-    font-size: clamp(2.1rem, 4vw, 3rem);
+.watermark {
+    position: absolute;
+    top: -0.35em;
+    right: 0.2em;
+    font-family: var(--font-display);
     font-weight: 700;
-    color: var(--signal);
+    font-size: clamp(5rem, 11vw, 9rem);
     line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--line);
+    opacity: 0.7;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+.card-head,
+.content {
+    position: relative;
+    z-index: 1;
 }
 
 .kicker {
+    display: inline-block;
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.22em;
-    color: var(--muted);
-    text-transform: uppercase;
-}
-
-.body {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
+    letter-spacing: 0.12em;
+    color: var(--signal);
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--signal-dim);
+    border-radius: 999px;
 }
 
 .title {
+    margin: 0.9rem 0 0;
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.55rem, 3.2vw, 2.35rem);
     color: var(--paper);
     line-height: 1.15;
+    max-width: 22ch;
 }
 
-.summary {
-    margin-top: 0.5rem;
-    color: var(--depth);
-    font-size: 1rem;
-    max-width: 60ch;
+.paragraphs {
+    margin-top: 1.6rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem 2.5rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
 }
 
-.desc {
-    margin-top: 1.5rem;
+.para {
+    line-height: 1.7;
     color: var(--muted);
-    line-height: 1.85;
-    max-width: 65ch;
+    font-size: 0.95rem;
+}
+
+.para.lead {
+    color: var(--paper);
+    font-size: 1.02rem;
 }
 
 .footer {
@@ -279,48 +309,16 @@ const { active, count, isActiveSection, next, prev, goTo } =
     transform: translateX(2px);
 }
 
-.dots {
-    margin-top: 2rem;
-    padding-left: 0.1rem;
-}
-
-@media (max-width: 900px) {
-    .track {
-        width: 100%;
-        gap: 0;
-    }
-
-    .slide {
-        flex-basis: 100%;
-        max-width: 100%;
+@media (min-width: 860px) {
+    .paragraphs {
+        grid-template-columns: 1fr 1fr;
     }
 }
 
 @keyframes rise {
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-@media (max-width: 640px) {
-    .card {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 1.5rem;
-    }
-    .rail {
-        flex-direction: row;
-        align-items: baseline;
-        gap: 0.6rem;
-        border-left: none;
-        border-bottom: 1px solid var(--signal-dim, rgba(255, 255, 255, 0.12));
-        padding-left: 0;
-        padding-bottom: 0.6rem;
-    }
-    .footer {
-        flex-direction: column;
-        align-items: flex-start;
+        transform: translateY(0);
     }
 }
 
@@ -328,10 +326,23 @@ const { active, count, isActiveSection, next, prev, goTo } =
     .track {
         transition: none;
     }
-    .slide {
+    .card {
         animation: none !important;
         opacity: 1;
         transform: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 520px) {
+    .watermark {
+        font-size: 4rem;
     }
 }
 </style>
