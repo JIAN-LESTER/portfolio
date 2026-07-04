@@ -13,13 +13,14 @@ import { portfolioData } from '@/data/portfolio';
 <template>
     <HeroSection :personal="portfolioData.personal" />
     <AboutSection :personal="portfolioData.personal" />
+    <SkillsSection :skills="portfolioData.skills" />
+    <ProjectsSection :projects="portfolioData.projects" />
+    <ServicesSection :services="portfolioData.services" />
     <JourneySection
         :education="portfolioData.education"
         :experience="portfolioData.experience"
+        :capstone="portfolioData.projects[0]"
     />
     <ResumeSection :personal="portfolioData.personal" />
-    <ProjectsSection :projects="portfolioData.projects" />
-    <ServicesSection :services="portfolioData.services" />
-    <SkillsSection :skills="portfolioData.skills" />
     <ContactSection :personal="portfolioData.personal" />
 </template>
