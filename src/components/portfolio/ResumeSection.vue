@@ -145,7 +145,7 @@ const { isActiveSection } = useSectionSlide('resume');
 
 .preview-frame {
     position: relative;
-    width: min(100%, 620px);
+    width: fit-content;
     max-width: 100%;
     margin-left: auto;
     transform: translateZ(0);
@@ -162,7 +162,9 @@ const { isActiveSection } = useSectionSlide('resume');
 .preview-image {
     position: relative;
     display: block;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    max-height: min(78vh, 760px);
     height: auto;
     box-sizing: border-box;
     border: 1px solid var(--line);
@@ -176,8 +178,11 @@ const { isActiveSection } = useSectionSlide('resume');
     }
 
     .preview-frame {
-        width: min(100%, 420px);
         margin-inline: 0 auto;
+    }
+
+    .preview-image {
+        max-height: 52vh;
     }
 }
 

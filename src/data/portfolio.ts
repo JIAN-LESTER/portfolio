@@ -7,8 +7,8 @@ export const portfolioData: PortfolioData = {
         tagline:
             'I build complete software systems — combining clean UI, reliable backend logic, structured databases, APIs, and practical features that solve real-world problems.',
         bio: 'BS Information Technology graduate (Cum Laude) specializing in full-stack web and mobile development. I work across Laravel, React, Flutter, Firebase, and AI-assisted retrieval — building authentication, dashboards, real-time data, APIs, and database layers that fit together as one system rather than a pile of features. Currently relocating to Singapore and looking for a team that ships.',
-        location: 'Philippines → Relocating to Singapore, Aug 2026',
-        availability: 'Available August · open to remote work in July',
+        location: 'Philippines → Relocating to Singapore in August 2026',
+        availability: 'Onsite starting Aug 2026 · Remote support in July',
         email: 'tabarno.jian@gmail.com',
         github: 'https://github.com/JIAN-LESTER',
         linkedin: 'https://www.linkedin.com/in/jian-lester-tabarno/',
