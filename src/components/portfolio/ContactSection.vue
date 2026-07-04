@@ -57,7 +57,7 @@ function submitBuildRequest() {
                         <p
                             class="text-sm font-semibold tracking-[0.35em] text-cyan-200 uppercase"
                         >
-                            Contact
+                            Get in Touch
                         </p>
                         <h2
                             class="mt-4 text-3xl font-semibold text-white sm:text-4xl"
