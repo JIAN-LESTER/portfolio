@@ -18,9 +18,6 @@ const { active, count, isActiveSection, next, prev, goTo } =
             <div class="head-row">
                 <p class="eyebrow">PROJECTS</p>
                 <div class="head-right">
-                    <span class="tally">{{
-                        String(active + 1).padStart(2, '0')
-                    }} / {{ String(count).padStart(2, '0') }}</span>
                     <PaginationDots
                         :count="count"
                         :active="active"
@@ -133,13 +130,6 @@ const { active, count, isActiveSection, next, prev, goTo } =
     display: flex;
     align-items: center;
     gap: 1rem;
-}
-
-.tally {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.05em;
 }
 
 .track {
