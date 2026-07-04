@@ -12,13 +12,28 @@ Route::inertia('/portfolio', 'Portfolio')->name('portfolio');
 
 Route::post('/contact/build-request', function (Request $request) {
     $data = $request->validate([
+        'name' => ['required', 'string', 'max:120'],
+        'email' => ['required', 'email', 'max:255'],
+        'service' => ['required', 'string', 'max:150'],
         'message' => ['required', 'string', 'min:10', 'max:3000'],
     ]);
 
-    Mail::raw($data['message'], function ($message) {
+    $body = implode("\n", [
+        'New portfolio inquiry',
+        '',
+        'Name: '.$data['name'],
+        'Email: '.$data['email'],
+        'System or service: '.$data['service'],
+        '',
+        'Project details:',
+        $data['message'],
+    ]);
+
+    Mail::raw($body, function ($message) use ($data) {
         $message
             ->to('jianlestertabarno2014@gmail.com')
-            ->subject('New Portfolio Build Request');
+            ->replyTo($data['email'], $data['name'])
+            ->subject('New Portfolio Build Request: '.$data['service']);
     });
 
     return back();

@@ -45,12 +45,12 @@ export interface ProjectItem {
 export interface ServiceItem {
     code: string;
     title: string;
-    description: string;
-    deliverables: string[];
+    paragraphs: string[];
 }
 
 export interface SkillItem {
     name: string;
+    /** A lucide-vue-next icon name, kebab-case (e.g. "git-branch"). */
     logo?: string;
 }
 
