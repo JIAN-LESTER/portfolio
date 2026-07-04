@@ -59,6 +59,9 @@ const { active, count, isActiveSection, next, prev, goTo } =
                     <p class="range">
                         {{ experience.start }} &ndash; {{ experience.end }}
                     </p>
+                    <p v-if="experience.location" class="location">
+                        {{ experience.location }}
+                    </p>
                     <ul class="highlights">
                         <li v-for="(h, i) in experience.highlights" :key="i">
                             {{ h }}
@@ -144,6 +147,13 @@ const { active, count, isActiveSection, next, prev, goTo } =
     font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--muted);
+}
+
+.location {
+    margin-top: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--depth);
 }
 
 .honor {

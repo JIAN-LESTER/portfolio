@@ -51,6 +51,10 @@ const emit = defineEmits<{ go: [index: number] }>();
     position: relative;
 }
 
+.tick.is-active {
+    min-height: 2.5rem;
+}
+
 .bar {
     width: 1.1rem;
     height: 2px;
@@ -62,13 +66,14 @@ const emit = defineEmits<{ go: [index: number] }>();
 
 .label {
     position: absolute;
+    top: 50%;
     right: 2.2rem;
     font-size: 0.7rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--paper);
     opacity: 0;
-    transform: translateX(6px);
+    transform: translate(6px, -50%);
     transition:
         opacity 0.2s ease,
         transform 0.2s ease;
@@ -82,7 +87,7 @@ const emit = defineEmits<{ go: [index: number] }>();
 .tick:focus-visible .label,
 .tick.is-active .label {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate(0, -50%);
 }
 
 .tick:hover .bar,

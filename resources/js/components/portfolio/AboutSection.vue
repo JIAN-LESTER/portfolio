@@ -17,8 +17,10 @@ const { isActiveSection } = useSectionSlide('about');
 
             <div class="grid">
                 <h2 class="headline">
-                    I don&rsquo;t just ship features &mdash;<br />
-                    I ship the <span>system</span> underneath them.
+                    I turn ideas into applications with clean UI,
+                    reliable backend logic, structured databases, real-time dashboards,
+                    and AI-powered features built for real-world use.
+                    
                 </h2>
 
                 <div class="copy">
@@ -37,7 +39,7 @@ const { isActiveSection } = useSectionSlide('about');
                         <li>
                             <span class="k">Focus</span
                             ><span class="v"
-                                >Web &middot; Mobile &middot; AI retrieval</span
+                                >Web &middot; Mobile &middot; AI</span
                             >
                         </li>
                     </ul>

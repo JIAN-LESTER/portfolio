@@ -5,7 +5,7 @@ export const portfolioData: PortfolioData = {
         name: 'Jian Lester Tabarno',
         role: 'Full-Stack Web & Mobile Developer',
         tagline:
-            'I build the systems behind the answer — retrieval pipelines, real-time dashboards, and cross-platform apps that hold up once real people start using them.',
+            'I build complete software systems — combining clean UI, reliable backend logic, structured databases, APIs, and practical features that solve real-world problems.',
         bio: 'BS Information Technology graduate (Cum Laude) specializing in full-stack web and mobile development. I work across Laravel, React, Flutter, Firebase, and AI-assisted retrieval — building authentication, dashboards, real-time data, APIs, and database layers that fit together as one system rather than a pile of features. Currently relocating to Singapore and looking for a team that ships.',
         location: 'Philippines → Relocating to Singapore, Aug 2026',
         availability: 'Available August · open to remote work in July',
@@ -25,7 +25,7 @@ export const portfolioData: PortfolioData = {
         end: '2026',
         honor: 'Cum Laude',
         description:
-            'Graduated with a GWA of 1.551 (1.00 is highest) — coursework and thesis work centered on applied software systems rather than theory alone.',
+            'Graduated with a GWA of 1.551, with 1.00 as the highest grade. Coursework and capstone work focused on applied software systems, including full-stack development, mobile applications, database design, and real-world system implementation.',
     },
 
     experience: {
@@ -33,6 +33,7 @@ export const portfolioData: PortfolioData = {
         role: 'IT Intern / Software Tester',
         start: 'Feb 2026',
         end: 'May 2026',
+        location: 'Cagayan de Oro City, Philippines',
         highlights: [
             'Tested internal web and mobile applications, documented issues, verified fixes, and supported QA workflows across development cycles.',
             'Debugged web modules and shipped front-end improvements that resolved reported usability issues.',
