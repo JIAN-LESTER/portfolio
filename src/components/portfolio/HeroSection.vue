@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useScrollStage, useSectionSlide } from '@/composables/useScrollStage';
 import type { PersonalInfo } from '@/types/portfolio';
 
@@ -13,6 +13,7 @@ const resultLine = ref('');
 const showResult = ref(false);
 const showIdentity = ref(false);
 const showTerminal = ref(true);
+const isMobileHero = ref(false);
 
 const fullQuery =
     "query --role='developer' --status='available' --window='Aug 2026'";
@@ -31,6 +32,12 @@ function goToResume() {
     if (resumeSectionIndex.value >= 0) {
         stage.goToSection(resumeSectionIndex.value);
     }
+}
+
+function syncMobileHero() {
+    isMobileHero.value =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(max-width: 820px)').matches;
 }
 
 function typeLine(
@@ -54,10 +61,13 @@ function typeLine(
 }
 
 onMounted(() => {
+    syncMobileHero();
+    window.addEventListener('resize', syncMobileHero);
+
     if (reducedMotion) {
         query.value = fullQuery;
         resultLine.value = fullResult;
-        showTerminal.value = false;
+        showTerminal.value = isMobileHero.value;
         showResult.value = true;
         showIdentity.value = true;
 
@@ -83,6 +93,10 @@ onMounted(() => {
         });
     }, 400);
 });
+
+onBeforeUnmount(() => {
+    window.removeEventListener('resize', syncMobileHero);
+});
 </script>
 
 <template>
@@ -91,12 +105,16 @@ onMounted(() => {
         class="stage-section hero"
         :class="{ 'is-active': isActiveSection }"
     >
-        <div class="section-inner">
+        <div class="section-inner" data-stage-scroll>
             <div class="hero-copy">
                 <p class="eyebrow"></p>
 
                 <transition name="terminal-fade">
-                    <div v-if="showTerminal" class="terminal" role="status">
+                    <div
+                        v-if="showTerminal || isMobileHero"
+                        class="terminal"
+                        role="status"
+                    >
                         <div class="terminal-head">
                             <span class="dot r"></span
                             ><span class="dot y"></span
@@ -502,8 +520,60 @@ onMounted(() => {
         min-width: 0;
     }
 
+    .profile-figure.expanded {
+        width: min(62vw, 240px);
+    }
+
     .scroll-hint {
         margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero {
+        align-items: stretch;
+    }
+
+    .section-inner {
+        max-height: 100%;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding-block: 5.25rem 2rem;
+        padding-inline: clamp(18px, 6vw, 30px);
+        align-items: start;
+    }
+
+    .eyebrow {
+        display: none;
+    }
+
+    .terminal-title {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .terminal-body {
+        padding: 0.95rem;
+        font-size: 0.72rem;
+        overflow-wrap: anywhere;
+    }
+
+    .identity {
+        margin-top: 1.35rem;
+    }
+
+    .name {
+        font-size: clamp(2rem, 12vw, 2.65rem);
+    }
+
+    .cta-row {
+        gap: 0.6rem;
+    }
+
+    .btn {
+        padding-inline: 1rem;
     }
 }
 

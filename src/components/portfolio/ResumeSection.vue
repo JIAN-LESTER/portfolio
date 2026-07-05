@@ -13,7 +13,7 @@ const { isActiveSection } = useSectionSlide('resume');
         class="stage-section resume"
         :class="{ 'is-active': isActiveSection }"
     >
-        <div class="section-inner">
+        <div class="section-inner" data-stage-scroll>
             <div class="panel">
                 <article class="copy">
                     <p class="eyebrow">RESUME</p>
@@ -61,10 +61,13 @@ const { isActiveSection } = useSectionSlide('resume');
 
 .section-inner {
     width: 100%;
+    max-height: 100%;
     padding: 0 15px;
     padding-inline: clamp(15px, 8vw, 140px);
     max-width: 1600px;
     margin-inline: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 .panel {
@@ -183,6 +186,60 @@ const { isActiveSection } = useSectionSlide('resume');
 
     .preview-image {
         max-height: 52vh;
+    }
+}
+
+@media (max-width: 640px) {
+    .resume {
+        align-items: stretch;
+    }
+
+    .section-inner {
+        padding-block: 5.25rem 2rem;
+        padding-inline: clamp(18px, 6vw, 30px);
+    }
+
+    .panel {
+        gap: 1.35rem;
+        align-items: start;
+    }
+
+    .eyebrow {
+        margin-bottom: 0.75rem;
+    }
+
+    .title {
+        margin-top: 0.75rem;
+        font-size: clamp(1.7rem, 9vw, 2.25rem);
+    }
+
+    .desc {
+        line-height: 1.6;
+    }
+
+    .actions {
+        margin-top: 1.15rem;
+    }
+
+    .btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .preview-frame {
+        width: 100%;
+        margin-inline: auto;
+    }
+
+    .preview-frame::before {
+        inset: 8px -8px -8px 8px;
+        border-radius: 12px;
+    }
+
+    .preview-image {
+        width: 100%;
+        max-height: none;
+        border-radius: 12px;
     }
 }
 

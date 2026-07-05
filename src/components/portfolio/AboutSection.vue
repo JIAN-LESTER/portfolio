@@ -12,7 +12,7 @@ const { isActiveSection } = useSectionSlide('about');
         class="stage-section about"
         :class="{ 'is-active': isActiveSection }"
     >
-        <div class="section-inner">
+        <div class="section-inner" data-stage-scroll>
             <p class="eyebrow">ABOUT</p>
 
             <div class="grid">
@@ -56,10 +56,13 @@ const { isActiveSection } = useSectionSlide('about');
 
 .section-inner {
     width: 100%;
+    max-height: 100%;
     padding: 0 15px;
     padding-inline: clamp(15px, 8vw, 140px);
     max-width: 1600px;
     margin-inline: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 .eyebrow {
@@ -150,6 +153,49 @@ const { isActiveSection } = useSectionSlide('about');
 @media (max-width: 780px) {
     .grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .about {
+        align-items: stretch;
+    }
+
+    .section-inner {
+        padding-block: 5.25rem 2rem;
+        padding-inline: clamp(18px, 6vw, 30px);
+    }
+
+    .eyebrow {
+        margin-bottom: 1.25rem;
+    }
+
+    .grid {
+        gap: 1.35rem;
+    }
+
+    .headline {
+        font-size: clamp(1.55rem, 8vw, 2rem);
+        line-height: 1.18;
+    }
+
+    .copy p {
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+    .facts {
+        margin-top: 1.35rem;
+    }
+
+    .facts li {
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .v {
+        text-align: right;
+        overflow-wrap: anywhere;
     }
 }
 
