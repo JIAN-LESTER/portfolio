@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useScrollStage, useSectionSlide } from '@/composables/useScrollStage';
 import type { PersonalInfo } from '@/types/portfolio';
 
@@ -13,7 +13,6 @@ const resultLine = ref('');
 const showResult = ref(false);
 const showIdentity = ref(false);
 const showTerminal = ref(true);
-const isMobileHero = ref(false);
 
 const fullQuery =
     "query --role='developer' --status='available' --window='Aug 2026'";
@@ -32,12 +31,6 @@ function goToResume() {
     if (resumeSectionIndex.value >= 0) {
         stage.goToSection(resumeSectionIndex.value);
     }
-}
-
-function syncMobileHero() {
-    isMobileHero.value =
-        typeof window !== 'undefined' &&
-        window.matchMedia('(max-width: 820px)').matches;
 }
 
 function typeLine(
@@ -61,13 +54,10 @@ function typeLine(
 }
 
 onMounted(() => {
-    syncMobileHero();
-    window.addEventListener('resize', syncMobileHero);
-
     if (reducedMotion) {
         query.value = fullQuery;
         resultLine.value = fullResult;
-        showTerminal.value = isMobileHero.value;
+        showTerminal.value = false;
         showResult.value = true;
         showIdentity.value = true;
 
@@ -93,10 +83,6 @@ onMounted(() => {
         });
     }, 400);
 });
-
-onBeforeUnmount(() => {
-    window.removeEventListener('resize', syncMobileHero);
-});
 </script>
 
 <template>
@@ -110,11 +96,7 @@ onBeforeUnmount(() => {
                 <p class="eyebrow"></p>
 
                 <transition name="terminal-fade">
-                    <div
-                        v-if="showTerminal || isMobileHero"
-                        class="terminal"
-                        role="status"
-                    >
+                    <div v-if="showTerminal" class="terminal" role="status">
                         <div class="terminal-head">
                             <span class="dot r"></span
                             ><span class="dot y"></span
@@ -557,6 +539,10 @@ onBeforeUnmount(() => {
     .terminal-body {
         padding: 0.95rem;
         font-size: 0.72rem;
+        overflow-wrap: anywhere;
+    }
+
+    .line {
         overflow-wrap: anywhere;
     }
 
